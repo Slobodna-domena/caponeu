@@ -1,0 +1,15 @@
+<section class="breadcrumbs">
+  <a href="<%= root_path %>">Home</a>
+  <a href="<%= about_path() %>">What is CAPONEU?</a>
+  <span>See CAPONEU events</span>
+</section>
+<section class="page page-events">
+  <main class="col-12">
+    <h1>Map of CAPONEU related events</h1>
+    <%= render "map/map", places: @events_for_map, directLink: 1 %>
+    <h2>Timeline of CAPONEU events</h2>
+    <% Event.not_hidden.joins(:event_types).where("event_types.label = 'Caponeu event'").uniq.sort_by(&:started).reverse.group_by { |event| event.started.year }.each do |year, events| %>
+      <%= render 'timeline/timeline-block-event', year: year, events: events %>
+    <% end %>
+  </main>
+</section>

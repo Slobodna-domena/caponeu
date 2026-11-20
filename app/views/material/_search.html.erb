@@ -1,0 +1,24 @@
+<%= form_tag path, class: "map-search" do %>
+  <input type="hidden" name="order" value="<%= params[:order] %>"/>
+  <div>
+    <label>Title</label>
+    <input type="text" name="title" value="<%= params[:title] %>" placeholder="All titles"/>
+  </div>
+  <div>
+    <label>Author</label>
+    <input type="text" name="author" value="<%= params[:author] %>" placeholder="All authors"/>
+  </div>
+  <div>
+    <label>Material type</label>
+    <%= select_tag :type, options_from_collection_for_select(@types, "id", "label", params[:type]), prompt: "All types" %>
+  </div>
+  <div>
+    <label>Topic</label>
+    <%= select_tag :topic, options_from_collection_for_select(@keywords, "id", "label", params[:topic]), prompt: "All topics" %>
+  </div>
+  <div class="row checkbox">
+    <input id="produced_by_caponeu" type="checkbox" name="produced_by_caponeu" <%= params[:produced_by_caponeu].present? ? "checked" : nil %>/>
+    <label for="produced_by_caponeu">Produced by Caponeu</label>
+  </div>
+  <button class="btn filled search" type="submit">Search</button>
+<% end %>

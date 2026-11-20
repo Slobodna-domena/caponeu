@@ -1,0 +1,31 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <a href="<%= cdp_novels_path() %>">Political novels</a>
+  <span>Authors index</span>
+  <span><%= params[:id] %></span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">Authors index</h1>
+</section>
+
+<main class="display-all no-margin-bottom">
+  <aside class="advanced-search-container col-4 authors-index always-visible">
+    <% ('A'..'Z').each do |letter| %>
+      <% if letter == params[:id] %>
+        <span class="active"><%= letter %></span>
+      <% elsif @letters.include?(letter) %>
+        <%= link_to letter, cdp_novels_authors_index_letter_path(letter) %>
+      <% else %>
+        <span class="disabled"><%= letter %></span>
+      <% end %>
+    <% end %>
+  </aside>
+  <section class="novels col-8">
+    <% @authors.each do |author| %>
+      <h3 class="author"><%= author.last_name %>, <%= author.first_name %></h3>
+      <% author.novel_authors.each do |novel| %>
+        <%= render "card", novel: novel %>
+      <% end %>
+    <% end %>
+  </section>
+</main>

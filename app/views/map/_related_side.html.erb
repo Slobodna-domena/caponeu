@@ -1,0 +1,52 @@
+
+<% if record.map_locations.any? %>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV.fetch("GOOGLE_MAPS_API_KEY", "")}&callback=initMap", async: true, defer: true %>
+<script>
+function initMap() {
+  if (typeof initMiniMap === "function") initMiniMap();
+<%
+      for geo in record.map_locations
+        if geo.polygon.present?
+%>
+<%= raw "if (typeof initPolyMap_#{geo.title.downcase.gsub(/[^a-z0-9]/, '')} === 'function') initPolyMap_#{geo.title.downcase.gsub(/[^a-z0-9]/, '')}();" %>
+<%
+        end
+      end
+%>
+}
+</script>
+  <div>
+    <h4>Map</h4>
+    <div class="map related-side">
+    <%
+      places = []
+      for geo in record.map_locations
+        
+        places << {
+          lat: geo.latitude,
+          lng: geo.longitude,
+          title: geo.title,
+          slug: record.slug,
+        }
+      end
+    %>
+      <%= render "map/mini_map", places: places %>
+    <%
+      for geo in record.map_locations
+        if geo.polygon.present?
+          place = {
+            title: geo.title.downcase.gsub(/[^a-z0-9]/, ''),
+            name: geo.title,
+            lat: geo.latitude,
+            lng: geo.longitude,
+            polygon: parse_wkt_to_google_maps(geo.polygon)
+        }.to_json.html_safe
+      %>
+        <%= render "map/mini_map_polygon", place: place %>
+        <% end
+      end
+    %>      
+    </div>
+  </div>
+<% end %>
+

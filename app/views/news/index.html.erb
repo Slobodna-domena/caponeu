@@ -1,0 +1,15 @@
+<section class="latest" id="news">
+  <h1>News</h1>
+  <div class="news_page_container">
+    <div class="news_page_articles">
+      <% @news.each do |i| %>
+        <%= render "news/news", news: i  %>
+      <%  end %>
+    </div>
+    <div class="news_page_feed">
+      <%=  render "news/feeds"  %>
+    </div>
+  </div>
+
+</section>
+<%= paginate @news %>

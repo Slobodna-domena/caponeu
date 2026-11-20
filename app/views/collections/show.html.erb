@@ -1,0 +1,94 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <a href="<%= cdp_collections_path() %>">Collections</a>
+  <span><%= @collection.title %></span>
+</section>
+
+<section class="page collection-header">
+  <h3 class="pdf-title">CAPONEU - The Cartography of the Political Novel in Europe</h3>
+  <main class="col-8">
+    <h1><%= @collection.title %></h1>
+    <p><%= @collection.summary %></p>
+    <% if @collection.audiences.any? %>
+      <p class="audience"><strong>Audience:</strong> <%=  @collection.audiences.map { |c| c.label }.join(" • ") %></p>
+    <% end %>
+  </main>
+  <% if @collection.organization %>
+    <div style="padding-top: 40px;">
+      <h3 style="margin-bottom: 20px;">Organization</h3>
+      <section class="cards-default organizations">
+        <%= render "organization/card", organization: @collection.organization %>
+      </section>
+    </div>
+  <% end %>
+  <div class="curated-by" style="padding-top: <%= @collection.organization ? "0" : "40px"; %>">
+    <h3>Curated by</h3>
+    <section class="cards-default people">
+      <% @collection.people.each do |person| %>
+        <article class="col-4">
+          <a href="<%= cdp_show_person_path(person) %>">
+            <%= image_tag person.photo.url if person.photo.url %>
+            <div class="group">
+              <p>Caponeu Team Member</p>
+              <h3><%= person.full_name %></h3>
+            </div>
+          </a>
+        </article>
+      <% end %>
+    </section>
+    <a class="as_pdf" href="<%= url_for(f: "pdf") %>">Print as PDF</a>
+  </div>
+</section>
+
+<% @collection.thematic_sections.each do |section| %>
+  <section class="page collection-section<%= section.related_model.blank? ? " empty-section" : "" %> ">
+    <div class="col-8">
+      <h2><%= section.title %></h2>
+      <p><%= section.summary %></p>
+    </div>
+    <% if section.related_model == "Novels" %>
+      <div class="novels">
+        <% section.novels.each do |novel| %>
+          <%= render "novel/card", novel: novel %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if section.related_model == "Materials" %>
+      <section class="cards-default materials">
+        <% section.materials.each do |material| %>
+          <%= render "material/card", material: material %>
+        <% end %>
+      </section>
+    <% end %>
+    <% if section.related_model == "People" %>
+      <section class="cards-default people">
+        <% section.people.each do |person| %>
+          <%= render "person/card", person: person %>
+        <% end %>
+      </section>
+    <% end %>
+    <% if section.related_model == "Events" %>
+      <section class="cards-default events">
+        <% section.events.each do |event| %>
+          <%= render "event/card", event: event %>
+        <% end %>
+      </section>
+    <% end %>
+    <% if section.related_model == "Topics" %>
+      <section class="cards-default topics">
+        <% section.keywords.each do |keyword| %>
+          <%= render "topic/card", topic: keyword %>
+        <% end %>
+      </section>
+    <% end %>
+  </section>
+<% end %>
+
+<% if @places.any? %>
+  <section class="page collection-section hidden_on_pdf">
+    <div class="col-8">
+      <h2>Collection's novels and events on the map</h2>
+    </div>
+    <%= render "map/map", places: @places, directLink: 1 %>
+  </section>
+<% end %>

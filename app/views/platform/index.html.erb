@@ -1,0 +1,13 @@
+<div class="map-hero">
+  <section>
+    <div class="col-8">
+      <h1>Explore the world of the political novel</h1>
+      <p>Dive into political stories like never before. Whether you prefer to browse through a curated list or explore connections on our interactive map, each path will lead you deeper into the exciting world of political novel.</p>
+      <%= link_to "enter the map", map_path, class: "btn filled globe" %>
+    </div>
+  </section>
+</div>
+
+<%= render "novel/related", record: @platform %>
+<%= render "material/related", record: @platform %>
+<%= render "topic/related", record: @platform %>

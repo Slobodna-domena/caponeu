@@ -1,0 +1,28 @@
+<%
+  if record.respond_to?(:novels_and_portraits)
+    novels = record.novels_and_portraits
+  elsif record.respond_to?(:novels_and_editions)
+    novels = record.novels_and_editions
+  else
+    novels = record.novels
+  end
+%>
+<% if novels.any? %>
+  <section class="section-header">
+    <% if record.class == ThematicCollection %>
+      <h2>Containing these political novels</h2>
+    <% elsif record.try(:name) == "Platform" %>
+      <h2>Political novel profiles</h2>
+    <% else %>
+      <h2>Related political novels</h2>
+    <% end %>
+    <% if record.try(:name) == "Platform" %>
+      <%= link_to "See all political novels", cdp_novels_path %>
+    <% end %>
+  </section>
+  <main class="novels">
+    <% novels.uniq.each do |novel| %>
+      <%= render "novel/card", novel: novel %>
+    <% end %>
+  </main>
+<% end %>

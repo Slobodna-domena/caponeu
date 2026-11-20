@@ -1,0 +1,44 @@
+<section class="section-header">
+  <h1 class="orange">Explore novels on the map</h1>
+  <p class="info">
+    As you click through the related novels on the map, you'll dive deeper with each step.<br>
+    Your journey will be saved each time you choose another related novel on the map.
+  </p>
+</section>
+<main class="map-tool">
+  <aside class="col-4">
+    <% if session[:map_items].present? %>
+      <% last_item = session[:map_items].last %>
+      <% history_items = session[:map_items][0..-2].reverse %>
+      
+      <div class="map-stack">
+        <h4>Currently selected</h4>
+        <%= render 'stack_item', item_id: last_item[1], model_name: last_item[0], index: 0 %>
+
+        <% if @matching_criteria&.any? %>
+        <%= format_matching_criteria(@matching_criteria) %>
+        <% end %>
+
+
+      </div>
+
+      <% if history_items.any? %>
+        <div class="map-stack">
+          <h4>Exploration history</h4>
+          <% history_items.each_with_index do |item, index| %>
+            <%= render 'stack_item', item_id: item[1], model_name: item[0], index: index + 1 %>
+            <% unless index == history_items.length - 1 %>
+              <hr class="history-divider">
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    
+    <%= link_to "Restart map", map_path, class: "btn filled restart" %>
+  </aside>
+  <section class="col-8">
+    <%= render "map", places: @places %>
+  </section>
+
+</main>

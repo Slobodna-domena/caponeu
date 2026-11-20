@@ -1,0 +1,15 @@
+<section class="section-header">
+  <h1 class="orange">Categories</h1>
+</section>
+<section class="topics no-margin-bottom">
+  <% @categories.each do |category| %>
+    <article class="col-4">
+      <a href="<%= cdp_show_category_path(category) %>">
+        <h3 class="<%= cdp_shape_disco(category.label) %>"><%= category.label %></h3>
+        <!-- <p><%= category.label %></p> -->
+      </a>
+    </article>
+  <% end %>
+</section>
+
+  <%== paginate @categories %>

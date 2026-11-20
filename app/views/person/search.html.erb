@@ -1,0 +1,46 @@
+
+<section class="section-header">
+  <h1 class="orange">Search people</h1>
+  <%= link_to "<< Back to people", cdp_people_search_path %>
+</section>
+
+<% unless @hide_search %>
+<section class="wide">
+  <main>
+    <%= form_for :search do |form| %>
+        <div>
+          <%= form.label :name, "NAME" %>
+          <%= form.text_field :name, value: session[:params] ? session[:params]['name'] : nil %>
+        </div>
+        <div>
+          <%= form.label :time_begin, "TIME FROM" %>
+          <%= form.date_field :time_begin, value: session[:params] ? session[:params]['time_begin'] : nil %>
+        </div>
+        <div>
+          <%= form.label :time_end, "TIME TO" %>
+          <%= form.date_field :time_end, value: session[:params] ? session[:params]['time_end'] : nil %>
+        </div>
+        <div>
+        <%= form.submit "SEARCH", class: "button filled yellow" %>
+        </div>
+    <% end %>
+  </main>
+</section>
+<% end %>
+
+<% if @hide_search %>
+  <section class="section-header results">
+    <h2>Showing results for:</h2>
+    <ul>
+      <% params[:search].each do |p| %>
+        <% if p[1].present? and !excluded_params.include?(p[0]) %>
+          <li><strong><%= p[0].gsub("_", " ") %></strong>: <%= value_for(p[0], p[1]) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <div>
+      <%= link_to "Refine search", cdp_search_people_path, class: "search" %>
+    </div>
+  </section>
+ <%= render "people_container", people: @people, params: @pagination_params %>
+<% end %>

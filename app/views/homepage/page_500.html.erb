@@ -1,0 +1,16 @@
+<section class="page error">
+  <main class="col-8">
+    <h1>Server error</h1>
+    <%= image_tag("500.svg") %>
+    <p class="lead">
+     Well, something went wrong. So it goes.
+    </p>
+    <p>
+      While we untangle this digital dilemma, here's how to keep the pages turning.
+    </p>
+    <ul>
+      <li>Report this error to the <%= link_to "administrators", "mailto:zadruga@slobodnadomena.hr" %> of the CAPONEU platform. </li>
+      <li><%= link_to "Return to the homepage:", root_path %> start afresh and dive into the captivating world of political novels.</li>
+      <li><%= link_to "Browse Political novels:", cdp_novels_path %> explore the vast world of political literature.</li>
+    </ul>
+</section>

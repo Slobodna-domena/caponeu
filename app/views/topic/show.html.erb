@@ -1,0 +1,14 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <a href="<%= cdp_topics_path() %>">Topics</a>
+  <span><%= @keyword.label %></span>
+</section>
+
+<section class="section-header alt margin-top-sm topic">
+  <h1 class="<%= cdp_shape_disco(@keyword.label) %>"><%= @keyword.label %></h1>
+  <% link_to "<< Back to all topics", cdp_topics_path %>
+</section>
+
+<%= render 'novel/related', record: @keyword %>
+<%= render 'material/related', record: @keyword %>
+<%= render 'collections/related', record: @keyword %>

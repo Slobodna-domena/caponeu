@@ -1,0 +1,250 @@
+@import "_variables"
+
+.topics article.col-4
+	h3
+		&.circle
+			&:before
+				@include circle
+		&.green
+			&:before
+				background: $green
+		&.orange
+			&:before
+				background: $orange
+		&.blue
+			&:before
+				background: $blue
+		&.yellow
+			&:before
+				background: $yellow
+	h3
+		&.square
+			&:before
+				@include square
+		&.green
+			&:before
+				background: $green
+		&.orange
+			&:before
+				background: $orange
+		&.blue
+			&:before
+				background: $blue
+		&.yellow
+			&:before
+				background: $yellow
+	h3
+		&.slice
+			&:before
+				@include slice
+		&.green
+			&:before
+				background: $green
+		&.orange
+			&:before
+				background: $orange
+		&.blue
+			&:before
+				background: $blue
+		&.yellow
+			&:before
+				background: $yellow
+	h3
+		&.triangle
+			&:before
+				@include triangle
+		&.green
+			&:before
+				border-top: 25px solid $green
+				border-right: 25px solid $green
+		&.orange
+			&:before
+				border-top: 25px solid $orange
+				border-right: 25px solid $orange
+		&.blue
+			&:before
+				border-top: 25px solid $blue
+				border-right: 25px solid $blue
+		&.yellow
+			&:before
+				border-top: 25px solid $yellow
+				border-right: 25px solid $yellow
+	h3
+		&.circle, &.square, &.triangle, &.slice
+			&:before
+				position: relative
+				top: -5px
+				z-index: 1
+
+
+
+.materials
+	article
+		div
+			p
+				&.circle
+					&:before
+						@include circle
+				&.green
+					&:before
+						background: $green
+				&.orange
+					&:before
+						background: $orange
+				&.blue
+					&:before
+						background: $blue
+				&.yellow
+					&:before
+						background: $yellow
+			p
+				&.square
+					&:before
+						@include square
+				&.green
+					&:before
+						background: $green
+				&.orange
+					&:before
+						background: $orange
+				&.blue
+					&:before
+						background: $blue
+				&.yellow
+					&:before
+						background: $yellow
+			p
+				&.slice
+					&:before
+						@include slice
+				&.green
+					&:before
+						background: $green
+				&.orange
+					&:before
+						background: $orange
+				&.blue
+					&:before
+						background: $blue
+				&.yellow
+					&:before
+						background: $yellow
+			p
+				&.triangle
+					&:before
+						@include triangle
+						border-bottom: 6px solid transparent
+						border-left: 6px solid transparent
+				&.green
+					&:before
+						border-top: 6px solid $green
+						border-right: 6px solid $green
+				&.orange
+					&:before
+						border-top: 6px solid $orange
+						border-right: 6px solid $orange
+				&.blue
+					&:before
+						border-top: 6px solid $blue
+						border-right: 6px solid $blue
+				&.yellow
+					&:before
+						border-top: 6px solid $yellow
+						border-right: 6px solid $yellow
+	article
+		div
+			p
+				display: flex
+				gap: 0px 8px
+				align-items: flex-start
+				&.circle, &.square, &.triangle, &.slice
+					&:before
+						position: relative
+						z-index: 1
+						top: 2px
+				&.small
+					&:before
+						min-width: 12px
+						width: 12px
+						height: 12px
+
+
+.section-header.topic
+	h1
+		&.circle
+			&:before
+				@include circle
+		&.green
+			&:before
+				background: $green
+		&.orange
+			&:before
+				background: $orange
+		&.blue
+			&:before
+				background: $blue
+		&.yellow
+			&:before
+				background: $yellow
+	h1
+		&.square
+			&:before
+				@include square
+		&.green
+			&:before
+				background: $green
+		&.orange
+			&:before
+				background: $orange
+		&.blue
+			&:before
+				background: $blue
+		&.yellow
+			&:before
+				background: $yellow
+	h1
+		&.slice
+			&:before
+				@include slice
+		&.green
+			&:before
+				background: $green
+		&.orange
+			&:before
+				background: $orange
+		&.blue
+			&:before
+				background: $blue
+		&.yellow
+			&:before
+				background: $yellow
+	h1
+		&.triangle
+			&:before
+				@include triangle
+		&.green
+			&:before
+				border-top: 25px solid $green
+				border-right: 25px solid $green
+		&.orange
+			&:before
+				border-top: 25px solid $orange
+				border-right: 25px solid $orange
+		&.blue
+			&:before
+				border-top: 25px solid $blue
+				border-right: 25px solid $blue
+		&.yellow
+			&:before
+				border-top: 25px solid $yellow
+				border-right: 25px solid $yellow
+
+
+	h1
+		position: relative
+		&.circle, &.square, &.triangle, &.slice
+			&:before
+				position: absolute
+				top: 5px
+				left: 0px
+				z-index: 1

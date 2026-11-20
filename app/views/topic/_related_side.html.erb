@@ -1,0 +1,10 @@
+<% if record.keywords.any? %>
+  <div>
+    <h4>Topics</h4>
+    <% links = Array.new %>
+    <% @novel.keywords.each do |keyword| %>
+      <% links.push(link_to keyword.label, cdp_show_topic_path(keyword.friendly_id)) %>
+    <% end %>
+    <%= raw links.join(" &bull; ") %>
+  </div>
+<% end %>

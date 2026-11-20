@@ -1,0 +1,44 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <span>Topics</span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">Topics</h1>
+</section>
+<main class="display-all no-margin-bottom">
+  <div class="sort-header col-8">
+    <div class="sort-container">
+      <% if @keywords.any? %>
+        <span>Sort by:</span>
+        <div class="sort">
+          <div><%= @filter_title %></div>
+          <ul>
+            <li><%= link_to "Name (Ascending)", cdp_topics_url(order: "name_asc") %></li>
+            <li><%= link_to "Name (Descending)", cdp_topics_url(order: "name_desc") %></li>
+            <li><%= link_to "Number of novels", cdp_topics_url(order: "number_of_novels")%></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <aside class="advanced-search-container always-visible col-4">
+    <h3>Search</h3>
+    <%= render 'topic/search', path: cdp_topics_path %>
+  </aside>
+  <section class="cards-default topics col-8">
+    <% @keywords.each do |keyword| %>
+      <%= render "topic/card", topic: keyword %>
+    <% end %>
+  </section>
+  <% unless params[:all] %>
+    <section class="pagination-container with-show-all">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <%= paginate @keywords, params: @pagination_params %>
+      </div>
+      <div class="col-2">
+        <%= link_to "Show&nbsp;all".html_safe, url_for(all: "1"), class: "btn filled", rel: "nofollow" if @keywords.total_pages > 1 %>
+      </div>
+    </section>
+  <% end %>
+</main>

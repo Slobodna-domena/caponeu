@@ -1,0 +1,94 @@
+<main class="search-results">
+  <h1>Search Results for "<%= @query %>"</h1>
+
+  <% if @query.blank? %>
+    <p>Please enter a search term.</p>
+  <% elsif !@has_results %>
+    <p>No results found for "<%= @query %>"</p>
+  <% else %>
+    <% if @novels.any? %>
+      <div class="section-header">
+        <h2 class="search-category">
+        Novels (<%= @novels_count %>)
+      </h2>
+      <%= link_to "See All Results", cdp_novels_path(title: @query) %>
+      </div>
+      <section class="novels col-8">
+        <% @novels.each do |novel| %>
+          <%= render "novel/card", novel: novel %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @materials.any? %>
+      <div class="section-header">
+        <h2 class="search-category">
+          Materials (<%= @materials_count %>)
+        </h2>
+        <%= link_to "See All Results", cdp_materials_path(title: @query) %>
+      </div>
+      <section class="cards-default materials col-8">
+        <% @materials.each do |material| %>
+          <%= render "material/card", material: material %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @events.any? %>
+      <div class="section-header">
+        <h2 class="search-category">
+          Events (<%= @events_count %>)
+        </h2>
+        <%= link_to "See All Results", cdp_event_path(title: @query) %>
+      </div>
+      <section class="cards-default events col-8">
+        <% @events.each do |event| %>
+          <%= render "event/card", event: event %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @people.any? %>
+      <div class="section-header">
+        <h2 class="search-category">
+          People (<%= @people_count %>)
+        </h2>
+        <%= link_to "See All Results", cdp_people_path(title: @query) %>
+      </div>
+      <section class="cards-default people col-8">
+        <% @people.each do |person| %>
+          <%= render "person/card", person: person %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @organizations.any? %>
+      <div class="section-header">
+        <h2 class="search-category">
+          Organizations (<%= @organizations_count %>)
+        </h2>
+        <%= link_to "See All Results", cdp_organizations_path(title: @query) %>
+      </div>
+      <section class="cards-default organizations col-8">
+        <% @organizations.each do |organization| %>
+          <%= render "organization/card", organization: organization %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @topics.any? %>
+      <div class="section-header">
+        <h2 class="search-category">
+          Topics (<%= @topics_count %>)
+        </h2>
+        <%= link_to "See All Results", cdp_topics_path(title: @query) %>
+      </div>
+      <section class="cards-default topics col-8">
+        <% @topics.each do |topic| %>
+          <%= render "topic/card", topic: topic %>
+        <% end %>
+      </section>
+    <% end %>
+  <% end %>
+</main>
+

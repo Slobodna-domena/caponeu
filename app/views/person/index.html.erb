@@ -1,0 +1,30 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <span>People</span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">People</h1>
+</section>
+<main class="display-all no-margin-bottom">
+  <div class="sort-header col-8">
+    <div class="sort-container">
+      <% if @people.any? %>
+        <div class="sort">
+          <div><%= @filter_title %></div>
+          <ul>
+            <li><%= link_to "Surname (Ascending)", cdp_people_url(order: "name_asc") %></li>
+            <li><%= link_to "Surname (Descending)", cdp_people_url(order: "name_desc") %></li>
+            <li><%= link_to "Type", cdp_people_url(order: "type") %></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <button class="btn text advanced-search">Advanced search</button>
+  <aside class="advanced-search-container col-4">
+    <h3>Advanced search</h3>
+    <button class="close-icon" type="button"></button>
+    <%= render 'person/search', path: cdp_people_path %>
+  </aside>
+  <%= render "people_container", people: @people, params: @pagination_params, hide_all: params[:all] %>
+</main>

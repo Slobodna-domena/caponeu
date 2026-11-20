@@ -1,0 +1,1087 @@
+@import "_variables"
+
+html
+	box-sizing: border-box
+
+*, *:before, *:after
+	box-sizing: inherit
+
+*:focus-visible
+	outline: 3px solid $blue
+	border: none
+
+body
+	margin: 0px
+	font-family: "uncut", Arial
+	background: $paper
+	color: $black
+
+::selection
+	color: $white
+	background: $orange
+
+@for $i from 1 through 12
+	.col-#{$i}
+		flex: 0 1 calc((100%/12) * #{$i})
+
+p, ul li, ol li
+	font-size: 18px
+	font-weight: normal
+	line-height: 1.55
+
+h1, h2, h3, h4
+	line-height: 1.2
+
+h1, h2, h3
+	font-weight: 600
+
+h1, h2
+	font-size: 42px
+
+h3
+	font-size: 22px
+
+h4
+	font-size: 18px
+	font-weight: bold
+
+a
+	text-decoration: none
+
+strong
+	font-weight: 600
+	color: $black
+
+em
+	font-style: italic
+	color: $black
+
+span
+	color: $black
+
+section
+	margin: 0px auto
+	max-width: 1420px
+	padding: 0px 50px
+
+.wide
+	margin: 40px 0px 80px
+	max-width: 100%
+	padding: 0px
+	main, section
+		margin: 0px auto
+		max-width: 1420px
+		padding: 80px 50px
+
+.novels, .cards-default
+	display: flex
+	flex-flow: wrap
+	padding: 0px 25px
+	max-width: 1420px
+	margin: 0px auto 130px
+	gap: 40px 0px
+	align-items: flex-start
+	article
+		margin: 0px 25px 0px
+
+.login
+	padding: 0px 50px
+	max-width: 1420px
+	margin: 0px auto 40px
+
+.novels
+	margin-bottom: 120px
+	gap: 80px 0px
+	article.col-4
+		padding: 0px
+		border: 0px
+		a
+			display: grid
+			grid-template-columns: 180px 1fr
+			gap: 24px
+			height: 100%
+		.novel_img
+			position: relative
+			&::after
+				content: ""
+				background: $orange
+				display: block
+				width: 100%
+				height: 8px
+				position: absolute
+				top: 5px
+				right: 0px
+				z-index: -1
+			img
+				display: block
+				width: 100%
+				height: auto
+				position: relative
+				transition: transform 0.5s
+		.novel_info
+			display: flex
+			flex-flow: column nowrap
+		p.author
+			font-size: 16px
+			color: $black
+			line-height: 1.2
+		h3.title-eng
+			font-size: 22px
+			font-weight: bold
+			color: $black
+			font-weight: 600
+			margin-top: 2px
+			overflow-wrap: anywhere
+			margin-bottom: 5px
+		h3.title
+			color: $grey
+			font-size: 16px
+			font-weight: normal
+			margin-top: 2px
+			overflow-wrap: anywhere
+		p.portrait_author
+			margin-top: 12px
+			padding: 10px 0px
+			border-top: 1px solid $orange
+			border-bottom: 1px solid $orange
+			font-size: 16px
+			color: $black
+			line-height: 1.2
+			span
+				display: block
+				color: $grey
+		.keywords
+			margin-top: 12px
+			p
+				display: inline-block
+				font-size: 16px
+				color: $secondary-blue
+				line-height: 1.2
+				&::after
+					content: "•"
+					margin-left: 3px
+				&:last-of-type::after
+					display: none
+		&:hover
+			position: relative
+			h3.title-eng
+				color: $orange
+			h3.title
+				color: $orange
+
+
+	article.col-4
+		flex: 0 0 calc(33.33% - 50px)
+
+.cards-default
+	gap: 60px 0px
+	article.col-4
+		flex: 0 0 calc(33.33% - 50px)
+	article.col-6
+		flex: 0 0 calc(50% - 50px)
+	article.col-4, article.col-6
+		p, h3
+			color: $black
+		p
+			font-size: 14px
+			line-height: 1.1
+			font-weight: normal
+			padding-bottom: 16px
+			min-height: 30px
+		h3
+			border-top: 1px solid $orange
+			padding-top: 16px
+		img
+			max-width: 100px
+			height: auto
+		a
+			height: 100%
+		a:hover
+			h3
+				color: $orange
+	&.people, &.organizations
+		article.col-4
+			a
+				display: flex
+				align-items: flex-start
+				gap: 24px
+			.group
+				flex: 1
+			h3
+				margin-top: 0px
+	&.materials
+		article.col-4
+			h3
+				border-top: 1px solid $orange
+			.material_author
+				font-size: 16px
+				padding-top: 10px
+				padding-bottom: 0px
+				line-height: 1.3
+				color: $grey
+				span
+					display: inline-block
+					color: $black
+	&.events
+		article.col-4
+			h3
+				border-top: 1px solid $yellow
+	&.topics
+		article.col-4
+			h3
+				border-top: 1px solid $secondary-blue
+	&.people
+		article.col-4
+			h3
+				border-top: 1px solid $blue
+	&.organizations
+		article.col-4
+			h3
+				border-top: 1px solid $green
+	&.collections
+		padding-top: 20px
+		h3
+			font-size: 42px
+			margin-bottom: 30px
+		.lead
+			font-size: 20px
+			font-weight: 600
+			line-height: 1.4
+			padding-bottom: 20px
+		.keywords
+			p
+				display: inline-block
+				font-size: 16px
+				color: $secondary-blue
+				line-height: 1.2
+				padding: 0px
+				min-height: auto
+				&::after
+					content: "•"
+					margin-left: 3px
+				&:last-of-type::after
+					display: none
+
+.collections
+	gap: 150px 0px
+
+.caponeu-product
+	margin-top: 30px
+	color: $grey
+
+
+.novels article.col-4, .cards-default article.col-4, .cards-default article.col-6
+	&:hover
+		position: relative
+		&:before
+				content: ""
+				display: block
+				width: calc(100% + 20px)
+				height: calc(100% + 20px)
+				top: -10px
+				left: -10px
+				background: $white
+				position: absolute
+				z-index: -1
+
+.news
+	article
+		min-height: auto
+		a
+			h3
+				flex: none
+.news-page, .cdp
+	.col-8
+		overflow: hidden
+		@media only screen and (max-width: $breakpoint3)
+			width: 100%
+
+	.detailes
+		p
+			strong
+				text-transform: uppercase
+
+	.gallery
+		margin-block: 40px
+		img
+			width: 100%
+		iframe
+			margin-bottom: 0 !important
+		.pagination
+			margin: 20px auto
+			display: flex
+			justify-content: center
+			align-items: center
+			gap: 50px
+			font-family: 'Vollkorn'
+			width: 100%
+			font-size: 16px
+			line-height: 24px
+			float: unset
+			height: 50px
+			.swiper-button-prev,
+			.swiper-button-next
+				position: relative
+				top: 0
+				margin: 0
+	.swiper-slide
+		position:
+		.photo-caption
+			position: absolute
+			bottom: 0
+			color: $white
+			font-size: 14px
+			padding: 20px
+			left: 0
+			width: calc(100% - 40px)
+			background: #000000E5
+			margin: 0
+			line-height: 1.2
+			@media only screen and (max-width: $breakpoint5)
+				width: calc(100% - 28px)
+				padding: 14px
+				line-height: 1.2
+
+
+.section-header
+	width: 100%
+	padding: 0px 50px
+	max-width: 1420px
+	margin: 0px auto 40px
+	display: flex
+	gap: 40px
+	flex-flow: row wrap
+	.info
+		flex: 0 1 100%
+	h1, h2
+		width: 100%
+	h1.orange
+			color: $orange
+	.to-right
+		justify-content: flex-end
+		.search-row
+			width: 100%
+			text-align: right
+			margin-bottom: 40px
+	> a
+		display: inline-block
+	a
+		text-decoration: underline
+		text-transform: uppercase
+		color: $secondary-blue
+		font-size: 16px
+		font-weight: bold
+		position: relative
+		&:hover
+			color: $orange
+			text-decoration: none
+	a.search
+		padding-left: 25px
+		&:before
+			content: url('search-icon.svg')
+			position: absolute
+			left: 0px
+			top: 0px
+		&:hover
+			&:before
+				content: url('search-icon-hover.svg')
+
+.sort-container
+	display: flex
+	gap: 0 10px
+	flex-flow: row nowrap
+	justify-content: flex-end
+	align-items: center
+	position: relative
+	z-index: 10
+	span
+		white-space: nowrap
+		font-size: 13px
+		font-weight: 600
+		display: block
+		text-transform: uppercase
+	.sort
+		position: relative
+		min-width: 210px
+		div, ul
+			padding: 12px
+		div
+			color: $dark-grey
+			font-size: 16px
+			position: relative
+			appearance: none
+			background: url("arrow-down.svg") $secondary-paper no-repeat calc(100% - 16px) 50%
+			background-size: 12px
+		ul
+			display: none
+			flex-flow: column nowrap
+			gap: 5px
+			background: $white
+			box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.2)
+			position: absolute
+			width: 100%
+			left: 0px
+			margin: 0px
+			li::before
+				display: none
+			li a
+				color: $secondary-blue
+				display: block
+				text-decoration: none
+				font-size: 16px
+				font-weight: 500
+				position: relative
+				&:hover
+					color: $orange
+					text-decoration: none
+				&:hover
+					color: $orange
+			&.is-active
+				display: flex
+
+
+.section-header.alt
+	h2
+		margin-top: 45px
+
+.section-header.results
+	> a
+		display: inline-block
+		margin-bottom: 60px
+	h2
+		font-size: 24px
+	ul
+		display: flex
+		font-size: 16px
+		margin-top: 20px
+		margin-bottom: 20px
+		gap: 0px 30px
+		flex-flow: row wrap
+		padding-left: 22px
+		li
+			position: relative
+			line-height: 1.5
+			&:before
+				content: "•"
+				display: block
+				color: $orange
+				font-size: 40px
+				position: absolute
+				top: -20px
+				left: -22px
+		li strong
+			text-transform: uppercase
+			font-weight: bold
+	.sort
+		min-width: 100px
+
+.section-header.topic
+	h1
+		color: $orange
+		padding-left: 80px
+
+.margin-top-md
+	margin-top: 90px
+
+.margin-top-sm
+	margin-top: 60px
+
+.no-margin-bottom
+	margin-bottom: 0px
+
+.btn-container
+	display: flex
+	flex-flow: row wrap
+	gap: 25px 40px
+
+.btn.text
+	color: $black
+	font-size: 16px
+	font-weight: bold
+	position: relative
+	text-decoration: none
+	text-transform: uppercase
+	display: inline-flex
+	text-decoration: none
+	background: none
+	border: none
+	&:hover
+		color: $orange
+		cursor: pointer
+	&.with-arrow
+		gap: 12px
+		&:after
+			content: url('arrow-right.svg')
+	&.with-arrow:hover
+		&:after
+			content: url('arrow-right-orange.svg')
+	&.alt
+		color: $secondary-blue
+		&:hover
+			cursor: pointer
+			filter: brightness(110%)
+	&.advanced-search
+		display: none
+		&:before
+			content: url('advanced-search.svg')
+	&.advanced-search:hover
+		&:before
+			content: url('advanced-search-orange.svg')
+
+
+.btn.outline
+	color: $secondary-blue
+	font-size: 14px
+	font-weight: bold
+	position: relative
+	text-decoration: none
+	text-transform: uppercase
+	display: inline-block
+	text-decoration: none
+	border: 1px solid $secondary-blue
+	padding: 7px 10px
+	&:hover
+		background: $secondary-blue
+		color: $white
+
+
+.btn.filled
+	display: inline-flex
+	align-items: center
+	background: $secondary-blue
+	padding: 14px 28px 12px
+	height: 48px
+	font-size: 16px
+	font-weight: bold
+	text-transform: uppercase
+	color: $white
+	border: none
+	gap: 10px
+	text-decoration: none
+	&:hover
+		cursor: pointer
+		filter: brightness(110%)
+		color: $white
+	&.search
+		&::before
+			content: url("search-icon-negative.svg")
+	&.log-in
+		&::before
+			content: url("log-in.svg")
+	&.log-out
+		&::before
+			content: url("log-out.svg")
+	&.restart
+		&::before
+			content: url("restart.svg")
+	&.globe
+		&::before
+			content: url("globe.svg")
+	&.arrow-right
+		&::after
+			content: url("arrow-right-negative.svg")
+
+.btn-map
+	width: 48px
+	height: 48px
+	background: $secondary-blue
+	border: none
+	display: flex
+	align-items: center
+	justify-content: center
+	&:hover
+		cursor: pointer
+		filter: brightness(110%)
+	&.enlarge
+		&::before
+			content: url("enlarge.svg")
+	&.zoom-in
+		&::before
+			content: url("plus.svg")
+	&.zoom-out
+		&::before
+			content: url("minus.svg")
+
+.breadcrumbs
+	display: flex
+	gap: 5px 10px
+	flex-flow: row wrap
+	a, span
+		font-size: 14px
+		text-transform: uppercase
+		font-weight: bold
+		display: inline-block
+		position: relative
+		margin-left: 14px
+		&:before
+			content: "/"
+			color: $black
+			margin-right: 5px
+			position: absolute
+			display: block
+			text-decoration: none
+			top: 0px
+			left: -14px
+	a
+		color: $secondary-blue
+		text-decoration: underline
+		&:first-of-type
+			margin-left: 0px
+		&:first-of-type:before
+			display: none
+		&:before
+			text-decoration: none
+	a:hover
+		color: $orange
+		text-decoration: none
+
+.display-all, .timeline
+	max-width: 1420px
+	display: grid
+	grid-template-columns: 4fr 8fr
+	padding: 0px 25px
+	margin: 70px auto 0px
+	gap: 40px 0px
+	.col-4, .col-8
+		padding: 0px 25px
+		margin: 0px
+	.advanced-search-container
+		border-right: 1px solid $terciary-paper
+		position: relative
+		h3
+			padding: 0px
+			margin-bottom: 40px
+		.close-icon
+			width: 40px
+			height: 40px
+			border: none
+			background: url('close-icon.svg') no-repeat center / 25px
+			position: absolute
+			top: 15px
+			right: 15px
+			display: none
+			&:hover
+				cursor: pointer
+				background: url('close-icon-hover.svg') no-repeat center / 25px
+	.col-8
+		display: flex
+		flex-flow: row wrap
+		justify-content: space-between
+		align-content: flex-start
+
+
+.display-all
+	aside
+		grid-row: 1 / span 4
+	.novels, .cards-default
+		article.col-4
+			margin: 0px
+			padding: 0px
+			flex: 0 0 calc(50% - 25px)
+
+.timeline
+	gap: 0px
+	.advanced-search-container
+		border: none
+		h3
+			display: none
+	.col-8
+		grid-row: 1 / span 3
+		grid-column: 2
+
+
+.timeline-lead-info
+	font-size: 20px
+	font-weight: 600
+	line-height: 1.3
+	padding: 0px 25px 40px
+
+.timeline-block
+	width: 100%
+	display: grid
+	grid-template-columns: 160px 4fr 3fr
+	border-top: 1px solid $terciary-paper
+	padding: 0px
+
+.timeline-block:last-of-type
+	border-bottom: 1px solid $terciary-paper
+
+
+
+.page-events
+	.timeline-block
+		grid-template-columns: 160px 1fr
+	.timeline-block_events
+		max-width: 700px
+		padding: 40px 0px
+	.timeline-event
+		font-size: 18px
+		margin: 0px
+
+.timeline-block_year
+	display: flex
+	flex-flow: column
+	align-items: center
+	&:before, &:after
+		content: ""
+		display: block
+		width: 1px
+		background: $orange
+	&:before
+		height: 24px
+	&:after
+		flex: 1 1 24px
+	span
+		padding: 15px 0px
+		color: $orange
+		font-weight: bold
+		font-size: 24px
+
+.timeline-block_novels, .timeline-block_events
+	display: flex
+	flex-flow: column
+	padding: 24px 24px 24px 0px
+
+.timeline-block_novels
+	gap: 10px
+
+.timeline-block_novels.no-padding
+	padding: 0px
+
+.timeline-block_events
+	gap: 16px
+
+
+.timeline-novel
+	position: relative
+	a
+		display: grid
+		grid-template-columns: 55px 1fr
+		color: $black
+		gap: 16px
+	.author
+		font-size: 16px
+		line-height: 1.2
+	.title
+		font-size: 18px
+		padding-top: 5px
+	.timeline-novel-img
+		img
+			width: 100%
+			height: auto
+	&:hover
+		.title
+			color: $orange
+		&::before
+			content: ""
+			display: block
+			width: calc(100% + 10px)
+			height: calc(100% + 10px)
+			top: -5px
+			left: -5px
+			background: #fff
+			position: absolute
+			z-index: -1
+
+.timeline-event
+	font-size: 18px
+	position: relative
+	padding-left: 24px
+	&::before
+		content: ""
+		display: block
+		width: 6px
+		height: 6px
+		border-radius: 50%
+		background: $black
+		position: absolute
+		left: 0px
+		top: 8px
+	a
+		color: $black !important
+		text-decoration: none !important
+	&:hover
+		a
+			color: $orange !important
+
+@media only screen and (max-width: $breakpoint1)
+
+	.novels
+		article.col-4
+			a
+				grid-template-columns: 130px 1fr
+
+	.novels, .cards-default
+		gap: 50px 0px
+		margin: 0px auto 80px
+		article.col-4
+			h3, h3.title-eng
+				font-size: 20px
+
+	.timeline-block
+		grid-template-columns: 100px 4fr 3fr
+
+	.timeline-block_year
+		padding-right: 20px
+
+	.page-events
+		.timeline-block
+			grid-template-columns: 100px 1fr
+
+	.collections
+		gap: 80px 0px
+
+@media only screen and (max-width: $breakpoint2)
+
+	.display-all
+		.novels, .cards-default
+			article.col-4
+				flex: 100%
+
+	.novels, .cards-default
+		order: 2
+		article.col-4
+			flex: 0 0 calc(50% - 50px)
+
+
+@media only screen and (max-width: $breakpoint3)
+
+	h1, h2
+		font-size: 32px
+
+	.grid-3
+		grid-template-columns: 1fr
+
+	.novels
+		a
+			grid-template-columns: 130px 1fr
+		&:hover
+			img
+				transform: none
+	
+	.sort-header
+		width: calc(100% - 40px)
+
+	.login
+		padding: 0px 25px
+
+	.display-all
+		display: flex
+		flex-flow: column
+		align-items: flex-start
+		aside
+			h3
+				padding: 0px
+				margin: 0px
+		.col-4, .col-8
+			padding: 0px
+			margin: 0px 25px
+		.sort-header
+			order: 1
+		.novels, .cards-default
+			article.col-4
+				flex: 0 0 calc(50% - 25px)
+
+	.display-all, .timeline
+		.advanced-search-container
+			position: fixed
+			top: 0px
+			left: 0px
+			width: 100%
+			min-height: 100vh
+			padding: 25px
+			margin: 0px
+			background: $paper
+			display: none
+			border: none
+			&.always-visible
+				display: block
+				position: static
+				min-height: auto
+				padding: 0px 25px
+				.map-search
+					height: auto
+					padding: 0px
+			.close-icon
+				display: block
+			.map-search
+				overflow-y: scroll
+				height: calc(100vh - 94px)
+				padding-bottom: 100px
+				scrollbar-width: none
+			&::-webkit-scrollbar
+				display: none
+			
+		.advanced-search-container.is-active
+			display: block
+			z-index: 1000
+			h3
+				display: block
+
+
+	.btn.text
+		&.advanced-search
+			display: flex
+			align-items: center
+			gap: 10px
+			padding: 0px 0px 0px 25px
+
+	.timeline
+		display: flex
+		flex-flow: column
+		gap: 40px
+
+	.cards-default
+		article.col-6
+			flex: 100%
+
+
+
+@media only screen and (max-width: $breakpoint4)
+
+	*:focus-visible
+		outline: none
+		border: none
+
+	.novels
+		article.col-4
+			flex: 100%
+
+	.display-all
+		.novels, .cards-default
+			article.col-4
+				flex: 100%
+
+
+@media only screen and (max-width: $breakpoint5)
+
+	.margin-top-sm
+		margin-top: 30px
+
+	h1.explore
+		padding: 0px 25px
+		margin: 130px auto 80px
+		font-size: 50px
+
+	.novels
+		article.col-4
+			margin: 0px
+			a
+				grid-template-columns: 100px 1fr
+	
+	.sort-header
+		width: auto
+	
+	.sort-container.right
+		width: 100%
+		margin-bottom: 20px
+		justify-content: flex-start
+		order: 1
+	.sort-container.left
+		order: 2
+
+	.topics, .materials
+		article.col-4
+			flex: 100%
+			margin: 0px
+
+	.cards-default
+		article.col-6
+			margin: 0px
+
+	.section-header
+		padding: 0px 25px
+
+	section.wide
+		main
+			padding: 80px 25px
+
+	section
+		padding: 0 25px
+
+	.display-all
+		margin: 0px
+		.col-8
+			padding: 0px
+			margin: 0px
+			&::after
+				width: 100%
+				left: 0
+
+		.novels
+			article.col-3
+				margin: 0px
+				flex: 100%
+
+		.advanced-search-container.always-visible
+			padding: 0px
+
+	.btn.text
+		&.advanced-search
+			padding: 0px
+
+	.timeline
+		margin: 0px
+		.col-8
+			padding: 0px
+
+	.timeline-lead-info
+		padding: 0px
+
+	.timeline-block
+		grid-template-columns: 60px 1fr
+
+	.timeline-block_year
+		grid-row: 1 / span 2
+		span
+			font-size: 18px
+
+	.page-events
+		.timeline-block
+			grid-template-columns: 60px 1fr
+		.timeline-block_events
+			padding: 36px 0px
+
+	.cards-default
+		article.col-6
+			h3
+				font-size: 32px
+				margin-bottom: 20px
+			.lead
+				font-size: 18px
+
+
+
+.person-photo
+	grid-column: 1 / 13
+	grid-row: 1
+
+.person-about
+	grid-column: 6 / 13
+	grid-row: 1
+
+
+.orange-link
+	color: $orange
+	font-weight: bold
+	&:hover
+		color: black
+
+.pdf-title, .pdf_only_content
+	display: none
+
+aside.authors-index
+	span, a
+		font-size: 28px
+		color: $mid-grey
+		padding: 0 10px 20px 0
+		display: inline-block
+		font-weight: bold
+	span.active
+		color: $orange		
+	a
+		color: $black
+		&:hover
+			color: $orange
+.novels h3.author
+	width: 100%;

@@ -1,0 +1,11 @@
+<article class="col-4">
+  <%= link_to cdp_show_organization_path(organization.friendly_id) do %>
+    <% if organization.logo.url %>
+      <%= image_tag organization.logo.compact.url %>
+    <% end %>
+    <div class="group">
+      <p> <%= organization.organization_types.map {|t| t.label }.join(" • ") %> </p>
+      <h3><%= organization.label %></h3>
+    </div>
+  <% end %>
+</article>

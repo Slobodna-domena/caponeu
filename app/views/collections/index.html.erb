@@ -1,0 +1,15 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <span>Collections</span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">Collections</h1>
+</section>
+
+<section class="cards-default collections">
+  <% @collections.each do |collection| %>
+    <%= render "collections/card", collection: collection %>
+  <% end %>
+</section>
+
+<%= paginate @collections %>

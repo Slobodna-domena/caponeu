@@ -1,0 +1,50 @@
+<section class="page">
+  <main class="col-8">
+    <% if !@edition.cover.file.nil? %>
+      <img src="<%= @edition.cover.url %>"/>
+    <% end %>
+    <p><%= @edition.novel.authors.map{ |a| a.full_name }.join(", ") %></p>
+    <br/>
+    <h1><%= @edition.novel.title %></h1>
+    <br/>
+    <h1><%= @edition.title %></h1>
+    <br/>
+    <p><%= @edition.place_of_publication.title %>, <%= @edition.from_year %>
+      <br/>
+      <p><%= @edition.language.label %>
+        <br/>
+        <%= raw @edition.novel.portrait_summary %>
+        <br/>
+        <%= raw @edition.novel.summary %>
+      </main>
+      <aside class="col-4">
+        <% if @edition.novel.keywords.any? %>
+          <h4>Topics</h4>
+          <br/>
+          <% links = [] %>
+          <% @edition.novel.keywords.each do |keyword| %>
+            <% links.push(link_to keyword.label, cdp_show_topic_path(keyword)) %>
+          <% end %>
+          <p><%= raw links.join(" ") %></p>
+        <% end %>
+        <% if @edition.novel.materials.any? %>
+          <h4>Related materials</h4>
+          <br/>
+          <% links = [] %>
+          <% @edition.novel.materials.each do |material| %>
+            <% links.push(link_to material.title, cdp_show_material_path(material)) %>
+          <% end %>
+          <p><%= raw links.join(" ") %></p>
+        <% end %>
+        <% if @edition.organizations.any? %>
+          <div>
+            <h4>Organizations</h4>
+            <% links = Array.new %>
+            <% @edition.organizations.each do |organization| %>
+              <% links.push(link_to organization.label, cdp_show_organization_path(organization.friendly_id)) %>
+            <% end %>
+            <%= raw links.join(" ") %>
+          </div>
+        <% end %>
+      </aside>
+    </section>

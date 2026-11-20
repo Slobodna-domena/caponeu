@@ -1,0 +1,26 @@
+<article class="col-4">
+  <a href="<%= cdp_show_novel_path(novel) %>">
+    <div class="novel_img">
+      <%= image_tag novel.cover.book.url if novel.cover.url %>
+    </div>
+    <div class="novel_info">
+      <p class="author"><%= novel.authors.map{ |a| a.full_name }.join(", ") %></p>
+      <% if novel.english_title.present? && novel.english_title != novel.title %>
+        <h3 class="title-eng"><%= novel.title %></h3>
+        <h3 class="title"><%= novel.english_title %></h3>
+      <% else %>
+        <h3 class="title-eng"><%= novel.title %></h3>
+      <% end %>
+
+      <p class="portrait_author"><span>Presented by:</span><%= novel.portrait_authors.map{ |a| a.full_name }.join(", ") unless novel.portrait_authors.empty? %></p>
+
+      <% unless novel.keywords.empty? %>
+        <div class="keywords">
+          <% novel.keywords.each do |keyword| %>
+            <p><%= keyword.label %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </a>
+</article>

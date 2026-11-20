@@ -1,0 +1,10 @@
+<% if record.events.any? %>
+  <section class="section-header">
+    <h2>Related events</h2>
+  </section>
+  <main class="events">
+    <% record.events.each do |event| %>
+      <%= render "event/card", event: event %>
+    <% end %>
+  </main>
+<% end %>

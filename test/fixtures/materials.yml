@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  title: MyText
+  summary: MyText
+  content: MyText
+  external_document: MyText
+  public: false
+  produced_by_caponeu: false
+  material_type: MyText
+  copyright_notice: MyText
+
+two:
+  id: 
+  title: MyText
+  summary: MyText
+  content: MyText
+  external_document: MyText
+  public: false
+  produced_by_caponeu: false
+  material_type: MyText
+  copyright_notice: MyText

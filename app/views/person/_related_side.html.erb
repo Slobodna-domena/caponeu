@@ -1,0 +1,10 @@
+<% if record.respond_to?(:people_and_authors) and record.people_and_authors.any? %>
+  <div>
+    <h4>Related people</h4>
+    <% links = Array.new %>
+    <% record.people_and_authors.each do |person| %>
+      <% links.push(link_to person.full_name, cdp_show_person_path(person.friendly_id)) %>
+    <% end %>
+    <%= raw links.join(" &bull; ") %>
+  </div>
+<% end %>

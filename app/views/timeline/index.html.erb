@@ -1,0 +1,42 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <span>Timeline</span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">Timeline tool</h1>
+</section>
+
+<main class="timeline no-margin-bottom">
+  <p class="timeline-lead-info">Find the novel. Discover the events that inspired it — even long before it was written.</p>
+  <button class="btn text advanced-search">Search timeline</button>
+  <aside class="advanced-search-container col-4">
+    <h3>Search timeline</h3>
+    <button class="close-icon" type="button"></button>
+    <%= form_tag cdp_timeline_path, method: :get, class: "map-search" do %>
+      <div>
+        <label>Year of publication</label>
+        <div class="row">
+          <input type="number" name="from_year" value="<%= params[:from_year] %>" placeholder="from"/>
+          <span>-</span>
+          <input type="number" name="to_year" value="<%= params[:to_year] %>" placeholder="to"/>
+        </div>
+      </div>
+      <div>
+        <label>Author</label>
+        <input type="text" name="author" value="<%= params[:author] %>" placeholder="All authors"/>
+      </div>
+      <div>
+        <label>Topic</label>
+        <%= select_tag :topic, options_from_collection_for_select(@keywords, "id", "label", params[:topic]), prompt: "All topics" %>
+      </div>
+      <button class="btn filled" type="submit">Show timeline</button>
+    <% end %>
+  </aside>
+
+  <div class="col-8">
+    <% @novels.each do |year, novels| %>
+      <%= render 'timeline/timeline-block', year: year, novels: novels %>
+    <% end %>
+  </div>
+
+</main>

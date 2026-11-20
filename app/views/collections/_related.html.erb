@@ -1,0 +1,10 @@
+<% if record.collections.any? %>
+  <section class="section-header">
+    <h2>Related collections</h2>
+  </section>
+  <section class="cards-default collections">
+    <% record.collections.each do |collection| %>
+      <%= render "collections/card", collection: collection %>
+    <% end %>
+  </section>
+<% end %>

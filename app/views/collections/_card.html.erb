@@ -1,0 +1,17 @@
+<article class="col-6">
+  <a href="<%= cdp_show_collection_path(collection) %>">
+    <p><%= collection.keywords.map { |k| k.label }.join(" • ") %></p>
+    <h3><%= collection.title %></h3>
+    <p class="lead">
+      <%= collection.summary %>
+    </p>
+    <% if collection.audiences.any? %>
+      <div class="keywords">
+        <span>Audience:</span>
+        <% collection.audiences.each do |audience| %>
+          <p><%= audience.label %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </a>
+</article>

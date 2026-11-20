@@ -1,0 +1,18 @@
+
+<section class="section-header alt topic">
+  <h1 class="<%= cdp_shape_disco(@language.label) %>"><%= @language.label %></h1>
+  <%= link_to "<< Back to all languages", cdp_languages_path %>
+</section>
+
+<% if @novels.any? %>
+  <section class="section-header">
+    <h2>Novels</h2>
+  </section>
+  <main class="novels">
+    <% @novels.each do |novel| %>
+      <%= render "novel/card", novel: novel %>
+    <% end %>
+  </main>
+<% end %>
+
+

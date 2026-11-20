@@ -1,0 +1,44 @@
+@import "_variables"
+
+.search-results
+  padding: 0px 50px
+  max-width: 1420px
+  margin: 0 auto
+  h1
+    font-size: 32px
+    margin-bottom: 40px
+    font-weight: 700
+  .novels, .cards-default
+    padding: 0px
+    margin: 30px -25px 80px
+  .section-header
+    padding: 0px
+    h2
+      margin: 0px
+      color: $orange
+  
+
+.search-category
+  margin-bottom: 40px
+  font-size: 24px
+  margin-bottom: 20px
+  a
+    color: $orange
+    text-decoration: none
+    font-weight: 600
+
+    &:hover
+      text-decoration: underline
+
+
+@media only screen and (max-width: $breakpoint5)
+
+  .search-results
+    padding: 0px 25px
+    .novels, .cards-default
+      margin: 30px 0px 80px
+      flex-flow: column
+      article.col-4
+        width: 100%
+        margin: 0px
+

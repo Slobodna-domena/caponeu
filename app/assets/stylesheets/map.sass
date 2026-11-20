@@ -1,0 +1,359 @@
+@import "_variables"
+
+.map-hero
+	background-image: url('map1.svg'), url('map2.svg'), url('map3.svg')
+	background-color: $orange
+	background-size: 185%
+	background-repeat: repeat
+	animation: anim 5s infinite step-end, anim2 300s infinite linear
+	width: 100%
+	display: flex
+	justify-content: center
+	margin: 40px 0px 80px
+	background-attachment: fixed
+	section
+		display: flex
+		padding: 80px 50px
+	.col-8
+		display: flex
+		flex-flow: column nowrap
+		gap: 40px
+		align-items: flex-start
+
+	h1
+		font-size: 64px
+	p
+		font-size: 24px
+		font-weight: 500
+	h1, p
+		color: $white
+
+@keyframes anim
+	0%
+		background-image: url('map1.svg')
+	33%
+		background-image: url('map2.svg')
+	66%
+		background-image: url('map3.svg')
+
+@keyframes anim2
+	0%
+		background-position: 0% 0%
+	25%
+		background-position: 100% 100%
+	50%
+		background-position: 100% 0%
+	75%
+		background-position: 0% 100%
+	100%
+		background-position: 0% 0%
+
+
+.map-tool
+	margin: 0px auto
+	max-width: 1420px
+	padding: 0px 50px
+	display: flex
+	flex-flow: row wrap
+	justify-content: space-between
+	align-items: flex-start
+	.col-4
+		flex: 0 1 33.33%
+	.col-8
+		flex: 0 1 calc(66.66% - 25px)
+		margin: 0px
+		padding: 0px
+		position: sticky
+		top: 20px
+	aside
+		h3
+			margin-bottom: 40px
+
+.map-tool.is-enlarged
+	max-width: 100%
+	padding: 0px
+	display: block
+	position: fixed
+	width: 100%
+	height: 100vh
+	top: 0px
+	left: 0px
+	.col-4
+		display: none
+	.col-8
+		max-width: 100%
+		height: 100%
+	.map
+		aspect-ratio: auto
+		height: 100%
+	.btn-map.enlarge
+		left: 10px
+		bottom: 10px
+	.zoom
+		right: 10px
+		bottom: 10px
+
+.map-stack
+	display: flex
+	flex-flow: column
+	gap: 16px
+	margin-bottom: 16px
+	overflow-y: auto
+	padding-bottom: 16px
+	h4 
+		text-transform: uppercase
+		margin-top: 0
+		font-size: 14px
+		font-weight: 600
+	p
+		font-size: 16px
+		span
+			text-transform: uppercase
+			font-weight: 600
+			font-size: 14px
+.map-card
+	background: $white
+
+	span
+		display: block
+		font-size: 14px
+	.sub-header
+		margin-bottom: 8px
+	&.in-stack
+		display: flex
+		div
+			padding: 16px
+			flex: 1
+		.title
+			margin-bottom: 16px
+		.btn.right
+			&::after
+				content: url("arrow-right.svg")
+			width: 48px
+			border-left: 1px solid $light-grey
+			display: flex
+			justify-content: center
+			align-items: center
+			&:hover
+				background: $secondary-blue
+				&::after
+					content: url("arrow-right-negative.svg")
+	// &.in-stack
+	// 	display: flex
+	// 	div
+	// 		padding: 16px
+	// 		flex: 1
+	// 	.title
+	// 		margin-bottom: 16px
+	// 	.btn.right
+	// 		&::after
+	// 			content: url("arrow-right.svg")
+	// 		width: 48px
+	// 		border-left: 1px solid $light-grey
+	// 		display: flex
+	// 		justify-content: center
+	// 		align-items: center
+	// 		&:hover
+	// 			background: $secondary-blue
+	// 			&::after
+	// 				content: url("arrow-right-negative.svg")
+	&.in-stack
+		position: relative
+		box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.2)
+		transition: box-shadow 0.3s
+		&:hover
+			box-shadow: 0px 0px 1px 0 rgba(0, 0, 0, 0.5)
+		.card-link
+			display: block
+			width: 100%
+			padding: 16px 16px 45px
+			color: inherit
+		.btn.outline
+			position: absolute
+			z-index: 1
+			left: 16px
+			bottom: 16px
+		&.is-active
+			border-left: 3px solid $secondary-blue
+	&.on-map
+		.header
+			padding-bottom: 12px
+			margin-bottom: 12px
+			padding-top: 16px
+			padding-right: 20px
+			position: sticky
+			top: 0px
+			background: $white
+			&::before
+				content: ""
+				height: 100%
+				width: 5px
+				background: $white
+				position: absolute
+				right: 100%
+				top: 0px
+		.title
+			margin-bottom: 4px
+			font-size: 16px
+		.date
+			color: $grey
+		.btn
+			margin: 10px 0 16px 0
+			padding: 0px 18px
+			font-size: 14px
+			height: 32px
+			width: 100%
+			justify-content: center
+			margin-bottom: 0px
+			color: $white !important
+		.container
+			display: flex
+			flex-flow: column
+			gap: 25px
+
+		&.two-column
+			width: 410px
+			.container
+				width: 100%
+				display: flex
+				flex-flow: row wrap
+				gap: 25px 20px
+				align-items: stretch
+				div
+					display: flex
+					flex-flow: column
+					flex: 0 0 calc(50% - 10px)
+					justify-content: flex-end
+				.btn
+					align-self: flex-end
+	&.orange
+		.header
+			border-bottom: 1px solid $orange
+	&.blue
+		.header
+			border-bottom: 1px solid $blue
+
+.map
+	width: 100%
+	aspect-ratio: 4/3
+	position: relative
+	div
+		border-top: 0 !important
+		padding-top: 0 !important
+		margin-bottom: 0 !important
+	iframe
+		width: 100%
+		height: 100%
+		display: block
+
+#map
+	aspect-ratio: 4/3
+	width: 100%
+	height: auto !important
+
+.display-card
+	position: absolute
+	top: 50px
+	left: 50px
+	display: flex
+	flex-flow: column
+	align-items: center
+	gap: 4px
+
+.map-pin
+	&:hover
+		cursor: pointer
+		filter: brightness(110%)
+
+.map.related-side
+	position: relative
+	aspect-ratio: 4/3 
+	height: auto 
+	h4
+		margin-top: 40px
+	#map
+		aspect-ratio: 4/3
+
+	a
+		display: block
+		position: absolute
+		width: 100%
+		height: 100%
+		top: 0px
+		z-index: 1
+		background: $black
+		opacity: 0
+		&:hover
+			opacity: 0.1
+
+
+@media only screen and (max-width: $breakpoint3)
+
+	.map-hero
+		background-attachment: scroll
+		section
+			padding: 50px
+		.col-8
+			flex: 100%
+		h1
+			font-size: 42px
+		p
+			font-size: 18px
+
+	.map-tool
+		flex-flow: column
+		gap: 60px
+		.col-4, .col-8
+			width: 100%
+
+	.map-stack
+		max-height: 348px
+
+@media only screen and (max-width: $breakpoint5)
+
+	.map-hero
+		background-size: 300%
+		background-position: 35% 10%
+		section
+			padding: 25px
+
+	.map-tool
+		padding: 0px 25px
+
+	.map
+		aspect-ratio: auto
+		height: 600px
+
+	#map
+		aspect-ratio: 3/4
+
+	.gm-style
+		.gm-style-iw-c
+			min-width: 250px !important
+		.map-card.on-map.two-column
+			width: 100%
+			.container
+				flex-flow: column
+
+.gm-style 
+	.gm-style-iw-chr
+		position: absolute
+		right: 0
+		z-index: 1
+	.gm-style-iw-c
+		border-radius: 0
+		min-width: 250px !important
+		padding-right: 15px !important
+		padding-bottom: 10px !important
+	.gm-style-iw-d
+		padding: 0px !important
+		padding-top: 0px !important
+		padding-left: 3px !important
+		padding-bottom: 5px !important
+	.map-card
+		width: 100%
+		padding: 0px
+	.gm-style-iw-d::-webkit-scrollbar
+		width: 0px
+		height: 0px
+

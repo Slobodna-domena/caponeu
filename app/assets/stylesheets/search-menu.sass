@@ -1,0 +1,115 @@
+@import "_variables"
+
+
+.search-menu
+	width: 100%
+	height: 100vh
+	position: fixed
+	background: $paper
+	left: 0
+	top: 0
+	z-index: 200
+	margin-right: 10px
+	justify-content: center
+	align-items: center
+	display: none
+	overflow-y: scroll
+	.container
+		flex: 0 1 1420px
+		padding: 0px 50px
+		display: flex
+		flex-flow: column nowrap
+		justify-content: flex-start
+		align-items: center
+		height: 100vh
+		gap: 20vh
+		h2
+			margin-bottom: 40px
+		p
+			font-size: 20px
+			font-weight: 500
+	.header
+		display: flex
+		justify-content: flex-end
+		align-items: center
+		width: 100%
+		padding-top: 47px
+		.close-icon
+			width: 50px
+			height: 50px
+			border: none
+			background: url("close-icon.svg") no-repeat center
+			background-size: 38px
+			&:hover
+				cursor: pointer
+				background: url("close-icon-hover.svg") no-repeat center
+	.col-8
+		max-width: 75%
+		width: 100%
+		padding-bottom: 80px
+	.main-search
+		display: flex
+		flex-flow: row nowrap
+		margin-top: 40px
+		select, input
+			font-size: 20px
+			padding: 16px
+			height: 60px
+		select
+			flex: 0 0 200px
+			border-right: 2px solid $paper
+		input
+			flex: 1
+			z-index: 1
+		.btn
+			height: auto
+
+
+.search-menu.is-active
+	display: flex
+
+@media only screen and (max-width: $breakpoint2)
+
+	.search-menu
+		.col-8
+			max-width: 100%
+
+@media only screen and (max-width: $breakpoint3)
+
+	.search-menu
+		.container
+			p
+				font-size: 18px
+		.main-search
+			select, input
+				font-size: 18px
+			select
+				flex: 0 0 175px
+
+
+
+@media only screen and (max-width: $breakpoint4)
+
+	.search-menu
+		.main-search
+			flex-flow: row wrap
+			gap: 10px
+			justify-content: right
+			select, input
+				flex: 100%
+			select
+				border-right: none
+			.btn.filled
+				margin-top: 15px
+
+
+
+
+@media only screen and (max-width: $breakpoint5)
+
+	.search-menu
+		.container
+			padding: 0px 25px
+			gap: 15vh
+		.header
+			height: 58px

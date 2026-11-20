@@ -1,0 +1,10 @@
+<% if record.people.any? %>
+  <section class="section-header">
+    <h2>Related people</h2>
+  </section>
+  <main class="cards-default people">
+    <% record.people.each do |person| %>
+      <%= render "person/card", person: person %>
+    <% end %>
+  </main>
+<% end %>

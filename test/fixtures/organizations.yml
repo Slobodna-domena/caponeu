@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  label: MyText
+  organization_type_id: 
+
+two:
+  id: 
+  label: MyText
+  organization_type_id: 

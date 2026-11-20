@@ -1,0 +1,29 @@
+<section class="breadcrumbs">
+<% if @organization.organization_types.any? { |type| type.hide_from_directory } %>
+  <a href="<%= root_path %>">Home</a>
+  <a href="<%= about_path() %>">What is CAPONEU?</a>
+  <a href="<%= about_team_path() %>">Meet CAPONEU team</a>
+  <span><%= @organization.label %></span>
+<% else %>
+  <%= link_to "Caponeu digital platform", cdp_home_path %>
+  <%= link_to "Organizations", cdp_organizations_path %>
+  <span><%= @organization.label %></span>
+<% end %>  
+</section>
+<section class="page cdp">
+  <main class="col-8">
+    <div class="header">
+      <h1><%= @organization.label %></h1>
+      <%= @organization.organization_types.map{|t| t.label}.join(", ") %>
+    </div>
+  </main>
+  <aside class="white col-4">
+    <% if @organization.logo.url %>
+      <%= image_tag @organization.logo.compact.url %>
+    <% end %>
+    <%= render 'event/related_side', record: @organization %>
+  </aside>
+</section>
+<%= render 'person/related', record: @organization %>
+<%= render 'novel/related', record: @organization %>
+<%= render 'material/related', record: @organization %>

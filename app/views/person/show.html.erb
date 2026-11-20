@@ -1,0 +1,67 @@
+<section class="breadcrumbs">
+<% if @person.person_types.any? { |type| type.hide_from_people_directory } %>
+  <a href="<%= root_path %>">Home</a>
+  <a href="<%= about_path() %>">What is CAPONEU?</a>
+  <a href="<%= about_team_path() %>">Meet CAPONEU team</a>
+  <span><%= @person.full_name %></span>
+<% else %>
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <a href="<%= cdp_people_path() %>">People</a>
+  <span><%= @person.full_name %></span>
+<% end %>
+</section>
+<section class="page cdp">
+  <main class="<%= @person.bio.blank? ? "col-8 no-content" : "col-8" %>">
+    <div class="person-header">
+      <div class="person-about">
+        <h1><%= @person.full_name %></h1>
+        <p class="meta">
+          <% if @person.birth.present? %>
+            <%= @person.birth.strftime("%d.%m.%Y") %>
+            <% if @person.place_of_birth.present? %>
+              (<%= @person.place_of_birth %>)
+            <% end %>
+          <% end %>
+          <% if @person.death.present? %>
+            &ndash;
+            <%= @person.death.strftime("%d.%m.%Y") %>
+            <% if @person.place_of_death.present? %>
+              (<%= @person.place_of_death %>)
+            <% end %>
+          <% end %>
+          <% if @person.birth.present? || @person.death.present? %><br>
+          <% end %>
+          <%= @person.person_types.map{ |t| t.label }.join(" • ") %>
+        </p>
+
+        <%= raw @person.bio if @person.bio %>
+
+      </div>
+    </div>
+  </main>
+  <aside class="white col-4">
+    <% if @person.photo.url %>
+      <div class="person-photo">
+        <%= image_tag @person.photo.compact.url %>
+      </div>
+      <%= raw @person.photo_source %>
+    <% end %>
+
+    <%= render 'event/related_side', record: @person %>
+    <%= render 'organization/related_side', record: @person %>
+  </aside>
+</section>
+<%= render 'novel/related', record: @person %>
+
+<% if @person.authors.any? %>
+  <section class="section-header">
+    <h2>Materials</h2>
+  </section>
+  <section class="cards-default materials">
+    <% @person.authors.each do |material| %>
+      <%= render "material/card", material: material %>
+    <% end %>
+  </section>
+<% end %>
+
+<%= render 'collections/related', record: @person %>

@@ -1,0 +1,13 @@
+<section class="section-header alt topic">
+  <h1 class="<%= cdp_shape_disco(@category.label) %>"><%= @category.label %></h1>
+</section>
+<% if @novels.any? %>
+  <section class="section-header">
+    <h2>Novels</h2>
+  </section>
+  <main class="novels">
+    <% @novels.each do |novel| %>
+      <%= render "novel/card", novel: novel %>
+    <% end %>
+  </main>
+<% end %>

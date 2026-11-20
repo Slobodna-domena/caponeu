@@ -1,0 +1,12 @@
+<%= form_tag path, class: "map-search" do %>
+  <input type="hidden" name="order" value="<%= params[:order] %>"/>
+  <div>
+    <label>Title</label>
+    <input type="text" name="title" value="<%= params[:title] %>" placeholder="All titles"/>
+  </div>
+  <div>
+    <label>Organization type</label>
+    <%= select_tag :type, options_from_collection_for_select(@types, "id", "label", params[:type]), prompt: "All types" %>
+  </div>
+  <button class="btn filled search" type="submit">Search</button>
+<% end %>

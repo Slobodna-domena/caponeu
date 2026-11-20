@@ -1,0 +1,66 @@
+$orange: #ec624d
+$light-orange: #f6b3a9
+$blue: #10c4d4
+$secondary-blue: #086068
+$terciary-blue: #63A5AB
+$green: #4fc77c
+$yellow: #ffcb43
+$secondary-yellow: #FFF1CC
+$black: #1a1a1a
+$grey: #737373
+$light-grey: #e6e6e6
+$mid-grey: #b3b3b3
+$dark-grey: #4D4D4D
+$paper: #f9f9f0
+$secondary-paper: rgba(0, 0, 0, 0.04)
+$terciary-paper: rgba(0, 0, 0, 0.1)
+$white: #fff
+
+$breakpoint1: 1500px
+$breakpoint2: 1200px
+$breakpoint3: 970px
+$breakpoint4: 750px
+$breakpoint5: 640px
+$breakpoint6: 500px
+
+@mixin circle
+  border-radius: 50%
+  content: ""
+  display: block
+  height: 50px
+  position: absolute
+  width: 50px
+  min-width: 50px
+  z-index: -1
+
+@mixin square
+  content: ""
+  display: block
+  height: 50px
+  position: absolute
+  width: 50px
+  min-width: 50px
+  z-index: -1
+
+@mixin slice
+  content: ""
+  display: block
+  height: 50px
+  position: absolute
+  width: 50px
+  min-width: 50px
+  border-bottom-right-radius: 50px
+  z-index: -1
+
+@mixin triangle
+  content: ""
+  display: block
+  height: 0px
+  position: absolute
+  width: 0px
+  border-top: 25px solid $yellow
+  border-right: 25px solid $yellow
+  border-bottom: 25px solid transparent
+  border-left: 25px solid transparent
+  background: none
+  z-index: -1

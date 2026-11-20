@@ -1,0 +1,23 @@
+<section class="section-header">
+  <h1 class="orange">Login</h1>
+  <%= link_to "<< Go back", root_path %>
+</section>
+
+
+<main class="login">
+  <%= content_tag(:p, flash[:alert], class: "devise_flash_alert") if flash[:alert] %>
+  <%= form_with url: "/admin/login", method: :post do |form| %>
+    <div>
+      <%= form.label "EMAIL" %>
+      <%= form.text_field "admin_user[email]" %>
+    </div>
+    <div>
+      <%= form.label "PASSWORD" %>
+      <%= form.password_field "admin_user[password]" %>
+    </div>
+    <div>
+      <%= form.submit "LOG IN", class: "btn filled log-in" %>
+      <%= link_to "Did you forget your password?", "/admin/password/new" %>
+    </div>
+  <% end %>
+</main>

@@ -1,0 +1,16 @@
+<article class="col-4">
+  <!-- <div>
+    <% for topic in material.keywords %>
+      <p><%= topic.label %></p>
+    <% end %>
+  </div> -->
+  <a href="<%= cdp_show_material_path(material.friendly_id) %>">
+    <p><%= material.material_types.map{ |t| t.label }.join(", ") %></p>
+    <h3><%= material.title %></h3>
+    <p class="material_author">
+      <%= "By: " if material.authors.any? %>
+      <%= raw material.authors.map{ |a| "<span>#{a.full_name}</span>" }.join(", ") %>
+    </p>
+
+  </a>
+</article>

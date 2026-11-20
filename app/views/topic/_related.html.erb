@@ -1,0 +1,15 @@
+<% if record.keywords.any? %>
+  <section class="section-header">
+    <% if record.try(:name) == "Platform" %>
+      <h2>Topics</h2>
+      <%= link_to "See all topics", cdp_topics_path %>
+    <% else %>
+      <h2>Related topics</h2>
+    <% end %>
+  </section>
+  <section class="cards-default topics">
+    <% record.keywords.each do |topic| %>
+      <%= render "topic/card", topic: topic %>
+    <% end %>
+  </section>
+<% end %>

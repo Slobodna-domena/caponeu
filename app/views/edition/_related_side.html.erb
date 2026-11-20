@@ -1,0 +1,18 @@
+<div class="editions_and_translations">
+  <h4>Editions and translations</h4>
+  <% record.editions.order(:from_year).each do |edition| %>
+    <div>
+      <p class="title"><%= edition.title %><%= ", " + edition.place_of_publication.title if edition.place_of_publication %><%= ", " + edition.from_year.to_s if edition.from_year %></p>
+      <div class="content">
+        <p> LANGUAGE: <%= edition.language.label %> </p>
+        <% translators = edition.translators.to_a %>
+        <% if translators.any? %>
+          <p> <%= translators.size > 1 ? "TRANSLATORS" : "TRANSLATOR" %>: <%= safe_join(translators.map { |t| link_to(t.full_name, cdp_show_person_path(t.friendly_id)) }, ", ") %> </p>
+        <% end %>
+        <% if edition.publisher %>
+          <p> PUBLISHER: <%= link_to edition.publisher.label, cdp_show_organization_path(edition.publisher.friendly_id) %> </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,60 @@
+<section class="breadcrumbs">
+  <a href="<%= news_path() %>">News</a>
+  <span><%= @news.title %></span>
+</section>
+<section class="page news-page">
+  <main class="col-8">
+    <h1><%= @news.title %></h1>
+    <div class="detailes">
+      <% if @news.date.present? %>
+        <p><strong>Date: </strong><%= @news.date %></p>
+      <% end %>
+      <% if @news.topic.present? %>
+        <p><strong>Topic: </strong><%= @news.topic %></p>
+      <% end %>
+      <% if @news.venue.present? %>
+        <p><strong>Where: </strong><%= @news.venue %></p>
+      <% end %>
+      <% if @news.contact.present? %>
+        <p><strong>Contact: </strong><%= @news.contact %></p>
+      <% end %>
+    </div>
+
+    <p><%= raw @news.lead %></p>
+
+    <% if @news.gallery_title.present? %>
+      <h2><%= @news.gallery_title %></h2>
+    <% end %>
+    <% if @news.galleries.any? %>
+      <div class="gallery swiper">
+        <div class="swiper-wrapper">
+          <% @news.galleries.each do |g| %>
+            <% if g.image.url %>
+              <div class="swiper-slide">
+                <%= image_tag g.image.big.url%>
+                <% if g.caption.present? %>
+                  <p class="photo-caption"><%= g.caption %></p>
+                <% end %>
+              </div>
+            <% end %>
+            <% if g.video.present? %>
+              <div class="swiper-slide">
+                <iframe src="https://www.youtube.com/embed/<%= g.video %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <% if g.caption.present? %>
+                  <p class="photo-caption"><%= g.caption %></p>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% if @galleries_count > 1 %>
+          <div class="pagination">
+            <span class="swiper-button-prev"></span>
+            <div id="numberSlides">1/<%= @galleries_count %></div>
+            <span class="swiper-button-next"></span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </main>
+</section>

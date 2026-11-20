@@ -1,0 +1,102 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <a href="<%= cdp_novels_path() %>">Political novels</a>
+  <span><%= @novel.title %></span>
+</section>
+
+<section class="page cdp">
+  <h3 class="pdf-title">CAPONEU - The Cartography of the Political Novel in Europe</h3>
+  <main class="col-8">
+    <div class="header">
+      <div>
+        <p class="author"><%= @novel.authors.map{ |a| a.full_name }.join(", ") %></p>
+
+        <% if @novel.english_title.present? && @novel.english_title!=@novel.title %>
+          <h1 class="title-eng"><%= @novel.english_title %></h1>
+          <h1 class="title"><%= @novel.title %></h1>
+        <% else %>
+          <h1 class="title-eng"><%= @novel.title %></h1>
+        <% end %>
+
+        <span class="download_as">
+          <% if @novel.portrait_authors.any? %>
+            <p class="presented_by">Presented by: <%= @novel.portrait_authors.map{ |a| link_to a.full_name, cdp_show_person_path(a.friendly_id) }.join(", ").html_safe %></p>
+          <% end %>
+          <p class="presented_by"><a class="as_pdf" href="<%= url_for(f: "pdf") %>">Print as PDF</a></p>
+        </span>
+      </div>
+    </div>
+
+    <div class="summary">
+      <%= raw @novel.portrait_summary %>
+    </div>
+    <%= raw @novel.summary %>
+    <div class="pdf_only_content">
+      <p> <strong>LANGUAGE:</strong> <%= @novel.languages.map{ |l| l.label }.join(", ") %> </p>
+      <% if @novel.publishers.any? %>
+        <p> <strong>PUBLISHER</strong><%= "S" if @novel.publishers.count > 1 %>: <%= raw @novel.publishers.map {|o| link_to o.label, cdp_show_organization_path(o.friendly_id) if o}.join(', ') %> </p>
+      <% end %>
+      <% unless @novel.censorship_status.empty? %>
+        <p> <strong>This title was not censored before publishing</strong> </p>
+      <% else %>
+        <p> <strong>CENSORSHIP STATUS:</strong> <%= @novel.censorship_status %></p>
+      <% end %>
+    </div>
+  </main>
+  <aside class="white col-4">
+    <div>
+      <p class="title">
+        <%= @novel.title %>
+        <%= ", " + @novel.place_of_origin.title if @novel.place_of_origin %>
+        <% if @novel.from_year.present? %>
+          , <%= @novel.from_year %><%= "—#{@novel.to_year}" if @novel.to_year.present? && @novel.to_year != @novel.from_year %>
+        <% end %>
+      </p>
+      <div class="content">
+        <p> LANGUAGE: <%= @novel.languages.map{ |l| l.label }.join(", ") %> </p>
+        <% if @novel.publishers.any? %>
+          <p> <strong>PUBLISHER</strong><%= "S" if @novel.publishers.count > 1 %>: <%= raw @novel.publishers.map {|o| link_to o.label, cdp_show_organization_path(o.friendly_id) if o}.join(', ') %> </p>
+        <% end %>
+        <% unless @novel.censorship_status.empty? %>
+          <p> This title was not censored before publishing </p>
+        <% else %>
+          <%= @novel.censorship_status %>
+        <% end %>
+      </div>
+    </div>
+    <% if @novel.cover.url %>
+      <%= image_tag @novel.cover.url %>
+      <%= raw @novel.cover_source %>
+    <% end %>
+    <%= render 'edition/related_side', record: @novel %>
+    <%= render 'person/related_side', record: @novel %>
+    <%= render 'organization/related_side', record: @novel %>
+    <%= render 'event/related_side', record: @novel %>
+    <%= render 'map/related_side', record: @novel %>
+    <%= render 'category/related_side', record: @novel %>
+    <%= render 'adaptation/related_side', record: @novel %>
+    <% if @novel.further_reading.present? %>
+      <div>
+        <h4>Further reading</h4>
+        <%= raw @novel.further_reading %>
+      </div>
+    <% end %>
+  </aside>
+</section>
+
+<% if @novel.materials.any? %>
+  <section class="section-header">
+    <h2>Materials</h2>
+    <div>
+      <%= link_to "See all Materials", cdp_materials_path %>
+    </div>
+  </section>
+  <section class="cards-default materials">
+    <% @novel.materials.each do |material| %>
+      <%= render "material/card", material: material %>
+    <% end %>
+  </section>
+<% end %>
+
+<%= render 'topic/related', record: @novel %>
+<%= render 'collections/related', record: @novel %>

@@ -1,0 +1,20 @@
+<%= form_tag path, class: "map-search" do %>
+  <input type="hidden" name="order" value="<%= params[:order] %>"/>
+  <div>
+    <label>Title</label>
+    <input type="text" name="title" value="<%= params[:title] %>" placeholder="All titles"/>
+  </div>
+  <div>
+    <label>Event type</label>
+    <%= select_tag :type, options_from_collection_for_select(@types, "id", "label", params[:type]), prompt: "All types" %>
+  </div>
+  <div>
+    <label>Date from</label>
+    <input type="date" name="from_date" value="<%= params[:from_date] %>" placeholder="from"/>
+  </div>
+  <div>
+    <label>Date to</label>
+    <input type="date" name="to_date" value="<%= params[:to_date] %>" placeholder="to"/>
+  </div>
+  <button class="btn filled search" type="submit">Search</button>
+<% end %>

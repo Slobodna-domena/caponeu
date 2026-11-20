@@ -1,0 +1,42 @@
+@import "_variables"
+
+.news_page_container
+  display: grid
+  grid-template-columns: 1fr auto
+  gap: 50px
+  align-items: start
+
+.news_page_articles
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  gap: 80px 50px
+
+.news_page_feed
+  width: 330px
+  .fb-container
+    margin-bottom: 40px
+
+
+@media only screen and (max-width: $breakpoint2)
+
+  .news_page_articles
+    display: grid
+    grid-template-columns: 1fr
+    gap: 80px 50px
+
+@media only screen and (max-width: $breakpoint3)
+
+  .news_page_container
+    grid-template-columns: 1fr
+
+
+@media only screen and (max-width: $breakpoint5)
+
+  .news_page_feed
+    width: 100%
+    .fb-container
+      iframe
+        width: 100% !important
+
+
+

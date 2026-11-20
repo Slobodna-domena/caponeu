@@ -1,0 +1,10 @@
+<% if record.adaptations.any? %>
+  <div>
+    <h4>Adaptations</h4>
+    <% record.adaptations.order(:year).each do |adaptation| %>
+      <div>
+        <p class="title"><%= adaptation.title %><%= ", " + adaptation.year.to_s if adaptation.year %>, <%= adaptation.adaptation_type.label %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

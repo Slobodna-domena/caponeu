@@ -1,0 +1,17 @@
+class CoverUploader < CarrierWave::Uploader::Base
+  include CarrierWave::MiniMagick
+
+  storage :file
+
+  def store_dir
+    "system/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  version :book do
+    resize_to_fit(360,nil)
+  end
+
+  version :compact do
+    resize_to_fit(200,nil)
+  end
+end

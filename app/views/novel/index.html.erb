@@ -1,0 +1,67 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <span>Political novels</span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">Political novels</h1>
+  <div class="btn-container">
+    <%= link_to "About Text Portraits", "/cdp/materials/the-political-novel-a-palimpsest#text-portraits", class: "btn text with-arrow" %>
+    <%= link_to "Political Education", "/cdp/materials/the-political-novel-a-palimpsest#political-novel-in-action", class: "btn text with-arrow" %>
+  </div>
+</section>
+
+<main class="display-all no-margin-bottom">
+  <div class="sort-header col-8">
+    <div class="sort-container left">
+      <% if @novels.any? %>
+        <span>Sort by:</span>
+        <div class="sort">
+          <div><%= @filter_title %></div>
+          <ul>
+            <li><%= link_to "Name (Ascending)", order: "name_asc"%></li>
+            <li><%= link_to "Name (Descending)", order: "name_desc" %></li>
+            <li><%= link_to "Year", order: "year"%></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <div class="sort-container right">
+      <%= link_to "Authors index", cdp_novels_authors_index_path, class: "orange-link" %> |
+      <%= link_to "See on the map", map_path(
+            order: params[:order],
+            title: params[:title],
+            author: params[:author],
+            portrait_author: params[:portrait_author],
+            from_year: params[:from_year],
+            to_year: params[:to_year],
+            name: params[:name],
+            organization: params[:organization],
+            category: params[:category],
+            topic: params[:topic],
+            language: params[:language]
+          ), class: "orange-link" %>
+    </div>
+  </div>
+  <button class="btn text advanced-search">Advanced search</button>
+  <aside class="advanced-search-container col-4">
+    <h3>Advanced search</h3>
+    <button class="close-icon" type="button"></button>
+    <%= render 'novel/search', path: cdp_novels_path %>
+  </aside>
+  <section class="novels col-8">
+    <% @novels.each do |novel| %>
+      <%= render "card", novel: novel %>
+    <% end %>
+  </section>
+  <% unless params[:all] %>
+    <section class="pagination-container with-show-all">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <%= paginate @novels, params: @pagination_params %>
+      </div>
+      <div class="col-2">
+        <%= link_to "Show&nbsp;all".html_safe, url_for(all: "1"), class: "btn filled", rel: "nofollow" if @novels.total_pages > 1 %>
+      </div>
+    </section>
+  <% end %>
+</main>

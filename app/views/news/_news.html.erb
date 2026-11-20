@@ -1,0 +1,15 @@
+<% if news %>
+  <%= link_to news_single_path(news) do %>
+    <article>
+      <h3><%= news.title  %></h3>
+      <div class="meta">
+        <% if !news.date&.empty? then %>
+          <p><strong>Date: </strong><%= news.date %></p>
+        <% end %>
+        <% if !news.venue&.empty? then %>
+          <p><strong>Where: </strong><%= news.venue %></p>
+        <% end %>
+      </div>
+    </article>
+  <% end %>
+<% end %>

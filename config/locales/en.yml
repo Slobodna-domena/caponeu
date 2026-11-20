@@ -1,0 +1,7 @@
+en:
+  attributes:
+    from_year: "Year"
+    geos: "Place of origin"
+    birth: "Birth date"
+    death: "Death date"    
+    summary: "Portrait content"

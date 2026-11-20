@@ -1,0 +1,644 @@
+@import "_variables"
+
+.page
+  display: flex
+  flex-flow: row nowrap
+  justify-content: space-between
+  margin: 80px auto 0px
+  align-items: flex-start
+  &.empty-section
+    margin-bottom: -40px
+  .btn-container
+    margin-bottom: 40px
+  .body-paragraph
+    width: 60%
+  .btn-container
+    display: flex
+    flex-flow: row wrap
+    gap: 30px 60px
+    margin-bottom: 40px
+  .col-8
+  main.col-8
+    flex: 0 1 calc(66.66% - 145px)
+  aside.col-4
+    flex: 0 1 calc(33.33% - 25px)
+  main h1, main h2, aside h4
+    color: $orange
+    margin-bottom: 50px
+    position: relative
+    // &:after
+    //   background: $orange
+    //   content: ""
+    //   display: block
+    //   height: 3px
+    //   position: absolute
+    //   bottom: -50px
+    //   width: 60px
+  p.meta
+    margin-top: -30px
+    font-weight: bold
+    font-size: 16px
+    &:after
+      background: $orange
+      content: ""
+      display: block
+      height: 3px
+      margin-top: 30px
+      width: 60px
+  main, .col-8
+    p
+      margin-bottom: 30px
+      margin-left: 0px !important
+    p span
+      line-height: 1.5 !important
+      background: none !important
+    h2
+      font-size: 30px
+    h3
+      font-size: 24px
+    h2, h3
+      margin-top: 50px
+      margin-bottom: 30px
+      &:after
+        bottom: -40px
+
+    ul li
+      list-style-type: disc
+    ol li
+      list-style-type: decimal
+    ul, ol
+      margin-bottom: 30px
+      padding-left: 20px
+      li
+        position: relative
+        margin-bottom: 20px
+        padding-left: 20px
+        &::marker
+          color: $orange
+    a
+      color: $secondary-blue !important
+      text-decoration: underline
+      &:hover
+        color: $orange !important
+        text-decoration: none
+      span
+        color: unset !important
+    div[style*="mso-element: endnote-list"], div[style*="mso-element: footnote-list"]
+      p, p span
+        font-size: 15px !important
+        line-height: 1.5 !important
+  #map
+    aspect-ratio: 2 / 1
+    width: 100%
+    height: auto !important
+    margin-bottom: 80px
+
+  .cards-default
+    margin-bottom: 60px
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 60px 50px
+    width: 100%
+    padding: 0px
+    order: 0
+    article.col-4
+      margin: 0px
+    a
+      text-decoration: none
+    p
+      margin: 0px
+  aside.white
+    background: $white
+    border-top: none
+    padding: 25px
+    div:first-of-type
+      border-top: 0px
+      padding-top: 0px
+    div
+      border-top: 1px solid $orange
+      padding-top: 20px
+      margin-bottom: 20px
+    h4
+      color: $black
+      font-weight: bold
+      margin-bottom: 30px
+      text-transform: uppercase
+      font-size: 20px
+      &:after
+        display: none
+    img
+      margin-bottom: 40px
+      width: 100%
+      height: auto
+    p, a
+      font-weight: bold
+      text-transform: uppercase
+      font-size: 14px
+    p
+      margin-bottom: 20px
+      line-height: 1.2
+      &.note
+          text-transform: none
+          margin: 20px 0 10px 0
+    a
+      color: $secondary-blue
+      text-decoration: underline
+      line-height: 1.6
+      overflow-wrap: anywhere
+      word-break: normal
+      &:hover
+        color: $orange
+        text-decoration: none
+    .editions_and_translations
+      padding-top: 0px
+      border-top: 0px
+      > div
+        border-top: 1px solid $light-grey
+        &:first-of-type
+          border-top: none
+          padding-top: 0px
+      .title
+        display: flex
+        gap: 10px
+        justify-content: space-between
+        align-items: flex-start
+        cursor: pointer
+        &::after
+          content: ""
+          min-width: 12px
+          height: 6px
+          display: block
+          background: url("arrow-down.svg")
+          transition: transform 0.1s
+          position: relative
+          top: 4px
+        &.is-active
+          + .content
+            display: block
+          &::after
+            transform: rotate(180deg)
+      .content
+        display: none
+        border-top: 0px
+        padding-top: 10px
+        p
+          margin-bottom: 10px
+
+
+.page-logos
+  display: grid
+  grid-template-columns: repeat(3, 1fr)
+  gap: 80px 50px
+  padding: 0px
+  .logo
+    flex: 0 1 calc(50% - 25px)
+    padding: 0px
+    margin-bottom: 0px
+    img
+      display: block
+      margin-bottom: 20px
+      max-height: 50px
+      max-width: 90%
+  hr
+    width: 100%
+    height: 1px
+    background: $light-grey
+    border: none
+    margin-bottom: 15px
+  p
+    margin-bottom: 0px !important
+  a
+    text-decoration: none !important
+    color: $black !important
+    &:hover
+      color: $orange !important
+      text-decoration: none
+
+.page-logos-team
+  display: flex
+  flex-flow: row wrap
+  gap: 60px
+  .logo
+    flex: 100%
+  .cards-default
+    margin-top: 0px !important
+
+.page-team
+  main
+    h2
+      margin-bottom: 80px
+
+.page-about, .page-events, .page-team
+  h1, h2
+    width: 60%
+
+.page-events-timeline
+  display: flex
+  flex-flow: column
+  gap: 40px
+  .event
+    span
+      color: $orange
+      font-size: 14px
+      font-weight: 600
+      text-transform: uppercase
+      &:after
+        content: "•"
+        font-size: 18px
+        position: relative
+        top: 1px
+        margin: 0px 8px
+      &:last-of-type:after
+        display: none
+  p
+    font-weight: 600
+    padding-top: 12px
+    margin-top: 12px
+    margin-bottom: 0px !important
+    border-top: 1px solid $orange
+    a
+      color: #086068
+      text-decoration: none !important
+
+
+.page.cdp, .news-page
+  margin-bottom: 120px
+  .col-8
+    border-bottom: 3px solid $orange
+    &.no-content
+      border-bottom: none
+    a
+      color: $secondary-blue
+      &:hover
+        color: $orange
+        text-decoration: none
+    ul li
+      list-style-type: disc
+    ol li
+      list-style-type: decimal
+    ul, ol
+      margin-bottom: 30px
+      padding-left: 20px
+      li
+        position: relative
+        margin-bottom: 20px
+        padding-left: 20px
+        &::marker
+          color: $orange
+    .header
+      margin-bottom: 80px
+      div
+        margin-bottom: 80px
+      p.author
+        font-size: 24px
+        font-weight: 500
+        margin-bottom: 10px
+      div::after
+        content: ""
+        display: block
+        position: relative
+        height: 1px
+        background: $orange
+        bottom: -16px
+      h1
+        color: $black
+        margin-bottom: 16px
+        &:after
+          display: none
+      h2
+        font-size: 30px
+        color: $black
+        margin-bottom: 16px
+        &:after
+          display: none
+      h4
+        font-size: 20px
+        font-weight: normal
+      a
+        text-transform: uppercase
+        color: $secondary-blue
+        font-size: 16px
+        font-weight: bold
+        position: relative
+        &:hover
+          color: $orange
+          text-decoration: none
+    .summary
+      p
+        font-weight: 500
+    iframe
+      display: block
+      width: 100%
+      height: auto
+      aspect-ratio: 16 / 9 auto
+      margin-bottom: 40px
+    .download
+      display: block
+      background: $white
+      box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.05)
+      padding: 30px 30px 30px 80px
+      font-size: 24px
+      color: $black
+      font-weight: 600
+      position: relative
+      margin-bottom: 40px
+      line-height: 1.4
+      word-break: break-word
+      transition: box-shadow 0.3s
+      text-decoration: none
+      &::before
+        content: ""
+        background: url('download.svg')
+        display: block
+        width: 32px
+        height: 40px
+        position: absolute
+        top: 24px
+        left: 24px
+      &:hover
+        color: $orange
+        box-shadow: 0px 2px 20px 0 rgba(0, 0, 0, 0.15)
+        &::before
+          background: url('download-hover.svg')
+
+.page.error
+  justify-content: center
+  h1
+    margin-bottom: 50px
+  h1::after
+    width: 100%
+    bottom: -24px
+    display: none
+  .lead
+    font-size: 24px
+    font-weight: 500
+    line-height: 1.3
+  img
+    width: 40%
+    margin-bottom: 50px
+
+
+.page.cdp
+  .col-8
+    .presented_by
+      margin-bottom: 10px
+      margin-top: 24px
+    .header
+      h1.title-eng
+        font-size: 42px
+      h1.title
+        font-size: 24px
+        font-weight: 500
+        color: $grey
+
+
+.page.collection-header
+  align-items: stretch
+  gap: 0px
+  flex-flow: row wrap
+  margin-bottom: 0px
+  .col-8
+    display: flex
+    flex-flow: column
+    h1
+      color: $black
+    p
+      font-weight: 500
+    .audience
+      font-size: 18px
+      font-weight: 400
+      margin: auto 0px 10px
+  .curated-by
+    width: 100%
+    border-bottom: 1px solid $orange
+    h3
+      margin-bottom: 20px
+    article.col-4
+      h3
+        margin-bottom: 0px
+    .as_pdf
+      float: right
+      margin-top: -40px
+      margin-bottom: 20px
+      text-transform: uppercase
+      color: #086068
+      font-size: 16px
+      font-weight: bold
+      text-decoration: underline
+      &:hover
+        color: $orange
+        text-decoration: none
+
+
+.page.collection-section
+	flex-flow: row wrap
+	gap: 0px
+	.col-8
+		margin-bottom: 10px
+	h2
+		margin: 0px 0px 40px
+	.novels
+		flex: 100%
+		padding: 0px
+		margin: 0px -25px
+	.cards-default
+		margin-bottom: 0px
+
+
+.page.collection-section, .page.collection-header
+  .col-8
+    flex: 0 0 66%
+
+
+@media only screen and (max-width: $breakpoint1)
+
+  .page
+    .cards-default
+      gap: 50px
+
+  .page.collection-header
+    .cards-default
+      margin-bottom: 50px
+
+  .page-team
+    main
+      h2
+        margin-bottom: 60px
+
+  .page.cdp
+    margin-bottom: 80px
+
+@media only screen and (max-width: $breakpoint2)
+
+  .page
+    .col-8
+      flex: 0 1 calc(66.66% - 80px)
+
+@media only screen and (max-width: $breakpoint3)
+
+  .page
+    flex-flow: column nowrap
+    gap: 130px 0px
+    margin-bottom: 80px
+    .body-paragraph
+      width: 100%
+    .col-8
+      .download
+        font-size: 20px
+    .cards-default
+      grid-template-columns: repeat(2, 1fr)
+    #map
+      margin-bottom: 50px
+    aside
+      padding-top: 40px
+      h4
+        font-size: 42px
+        text-transform: none
+    aside.col-4
+      width: 100%
+    // aside.white
+    //   h4
+    //     font-size: 20px
+
+
+  .page-about, .page-events, .page-team
+    h1, h2
+      width: 100%
+
+
+  .page.cdp
+    .col-8
+      .header
+        p.author
+          font-size: 18px
+        h1.title-eng
+          font-size: 32px
+        h1.title
+          font-size: 18px
+
+  .page-logos
+    grid-template-columns: repeat(2, 1fr)
+
+  .page.collection-section, .page.collection-header
+    .col-8
+      flex: 100%
+
+
+@media only screen and (max-width: $breakpoint5)
+
+  .page
+    margin-top: 40px
+    .col-8
+      h2
+        font-size: 24px
+        margin-top: 40px
+        &:after
+          bottom: -30px
+
+      h3
+        font-size: 24px
+      #map
+        aspect-ratio: 4 / 3
+    .cards-default
+      display: flex
+      flex-flow: column
+      align-items: stretch
+      margin-bottom: 30px
+    aside
+      h4
+        font-size: 30px
+  .page.error
+    h1
+      margin-bottom: 30px
+    img
+      width: 60%
+      margin-bottom: 30px
+
+  .page-logos
+    display: flex
+    flex-flow: column nowrap
+    gap: 50px
+    .logo
+      width: 100%
+
+  .page.collection-section
+    margin-top: 50px
+    margin-bottom: 60px
+    h2
+      margin-top: 0px
+    .novels, .cards-default
+      margin: 0px
+      margin-top: 0px
+
+.download_as
+  display: flex
+  justify-content: space-between
+  align-items: flex-end
+  margin: 0px
+
+  @media only screen and (max-width: $breakpoint5)
+    display: block
+
+
+@media print
+
+  header, footer, .breadcrumbs, .topics, .novels, .section-header
+    display: none
+    background: none
+  body
+    margin: 0px
+  p, a
+    font-size: 12px
+  p
+    margin-bottom: 10px
+  h1
+    font-size: 30px
+  section.page
+    padding: 0px
+    margin: 0px
+    display: block
+    .col-8
+      p
+        margin-bottom: 10px
+      a
+        text-decoration: none
+    aside.white
+      margin-top: 2cm
+      background: none
+      padding: 0px
+      img
+        display: none
+      .editions_and_translations
+        .title::after
+          display: none
+        .content
+          display: block
+      p, a
+        font-size: 12px
+      a
+        text-decoration: none
+        font-size: 12px
+
+  section.page.cdp
+    .col-8
+      border-bottom: none
+      .presented_by
+        a
+          font-size: 12px
+
+      iframe
+        display: none
+      .header
+        p.author, h1.title
+          font-size: 16px
+        h1.title
+          opacity: 0.7
+        h1.title-eng
+          font-size: 30px
+
+
+  @page
+    margin: 2.5cm 2.5cm 4cm 2.5cm
+
+  @page :footer
+    display: none

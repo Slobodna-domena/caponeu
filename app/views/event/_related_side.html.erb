@@ -1,0 +1,19 @@
+<% if record.events.any? %>
+  <% caponeuEvents = Array.new %>
+  <% otherEvents = Array.new %>
+  <% record.events.each do |event| %>
+    <% if event.event_types.any? {|h| h.id == 1 } %>
+      <% caponeuEvents.push(link_to event.title, cdp_show_event_path(event.friendly_id)) %>
+    <% else %>
+      <% otherEvents.push(link_to event.title, cdp_show_event_path(event.friendly_id)) %>
+    <% end %>
+  <% end %>
+  <div>
+    <h4>Related events</h4>
+    <%= raw otherEvents.join(" &bull; ") %>
+    <% if caponeuEvents.any? %>
+      <p class="note">The <em><%=record.full_name %></em> was referenced on events organized by the CAPONEU project</p>
+      <%= raw caponeuEvents.join(" &bull; ") %>
+    <% end %>
+  </div>
+<% end %>

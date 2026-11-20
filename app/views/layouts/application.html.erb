@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <% if @site_title %>
+      <title>
+        <%= "#{@site_title} - #{site_config["site_name"]}" %>
+      </title>
+      <meta content="<%= @site_title %>" property="og:title"/>
+    <% else %>
+      <title>
+        <%= site_config["site_name"] %>
+      </title>
+      <meta content="<%= site_config["site_name"] %>" property="og:title"/>
+    <% end %>
+    <link rel="canonical" href="<%= url_for(only_path: false, protocol: 'https') %>" />
+    <meta content="<%= @page_description ? strip_tags(@page_description) : site_config["site_description"] %>" name="Description"/>
+    <meta content="<%= @fb_image ? site_config["root_url"] + @fb_image : site_config["root_url"] + image_path("caponeu_og.png") %>" property="og:image"/>
+    <meta content="<%= @page_description ? strip_tags(@page_description) : site_config["site_description"] %>" property="og:description"/>
+    <meta content="<%= request.original_url %>" property="og:url"/>
+    <meta content="<%= site_config["site_name"] %>" property="og:site_name"/>
+    <meta content="max-image-preview:large" name="robots"/>
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application", type: "module" %>
+    <!-- Matomo -->
+    <script>
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['disableCookies']);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//matomo.slobodnadomena.hr/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '4']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+  </head>
+  <body>
+    <header>
+      <a class="logo" href="<%= root_path() %>">
+        <%= image_tag "caponeu.svg", alt: "caponeu - the cartography of political novel in europe" %>
+      </a>
+      <div class="right">
+        <% if current_admin_user %>
+          <div class="user">
+            <span><%= current_admin_user.name %></span>
+            <a href="/admin">CDP admin</a>
+          </div>
+        <% end %>
+        <button class="search-icon" type="button">
+        </button>
+        <button class="hamburger hamburger--spring" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+        <nav class="menu">
+          <div class="menu-left-side">
+            <div class="menu-left-side-container">
+              <div class="menu-main-link-header">
+                <%= link_to "The CAPONEU project", root_path, class: "menu-main-link" %>
+              </div>
+              <%= link_to "About Caponeu", about_path %>
+              <%= link_to "News", news_path %>
+              <%= link_to "Events", about_events_path %>
+              <%= link_to "Materials", cdp_materials_path %>
+              <%= link_to "Team", about_team_path %>
+            </div>
+          </div>
+          <div class="menu-right-side">
+            <div class="menu-right-side-container">
+              <div class="menu-main-link-header">
+                <%= link_to "The CAPONEU digital platform", cdp_home_path, class: "menu-main-link" %>
+              </div>
+              <%= link_to "Political novels", cdp_novels_path %>
+              <%= link_to "Map", map_path %>
+              <%= link_to "Timeline", cdp_timeline_path %>
+              <%= link_to "Collections", cdp_collections_path if ThematicCollection.active.any? %>
+              <%= link_to "Topics", cdp_topics_path %>
+              <%= link_to "Historical events", cdp_event_path %>
+              <%= link_to "People", cdp_people_path %>
+              <%= link_to "Organizations", cdp_organizations_path %>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="search-menu">
+        <section class="container">
+          <div class="header"><button class="close-icon" type="button"></button></div>
+          <div class="col-8">
+            <h2>Begin your search</h2>
+            <p>Search by category or globally.</p>
+            <p>Searching by category offers advanced options for further refinement.</p>
+            <%= form_tag cdp_novels_path, class: "main-search" %>
+            <select>
+              <option value="<%= cdp_novels_path %>">Political novels</option>
+              <option value="<%= cdp_materials_path %>">Materials</option>
+              <option value="<%= cdp_event_path %>">Events</option>
+              <option value="<%= cdp_people_path %>">People</option>
+              <option value="<%= cdp_organizations_path %>">Organizations</option>
+              <option value="<%= cdp_topics_path %>">Topics</option>
+              <option value="<%= cdp_global_search_path %>">All content</option>
+            </select>
+            <input type="text" id="browser" name="title" placeholder="Search..."></input>
+          <button class="btn filled search" type="submit">Search</button>
+        </form>
+      </div>
+    </section>
+  </div>
+</header>
+<%= yield %>
+<footer>
+  <section>
+    <div class="col-6">
+      <%= image_tag "eu-cofunded.svg", alt: "funded by the european union" %>
+      <p>This project has received funding from the European Union’s Horizon research
+        and innovation programme under grant agreement No 101094658
+      </p>
+      <p>
+        Co-funded by the European Union. Views and opinions expressed are however those of the author(s)
+        only and do not necessarily reflect those of the European Union or the European Research
+        Executive Agency (REA). Neither the European Union nor the granting authority can be held responsible for them.
+      </p>
+      <%= image_tag "ukri.png", alt: "funded by the european union" %>
+      <p>
+        This project is co-funded by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee - grant reference number 10061848.
+      </p>
+      <p>
+        This project is co-funded by UK Research and Innovation (UKRI) under the UK government’s
+        Horizon Europe funding guarantee - grant reference number 10051867.
+      </p>
+      <p>
+        This project is co-funded by UK Research and Innovation (UKRI) under the UK government’s
+        Horizon Europe funding guarantee - grant reference number 10073486
+      </p>
+    </div>
+    <div class="col-6">
+      <div>
+        <a class="facebook" href="https://www.facebook.com/profile.php?id=100089829465487"></a>
+        <a class="instagram" href="https://www.instagram.com/politicalnovel/"></a>
+        <a class="twitter" href="https://twitter.com/PoliticalNovel"></a>
+      </div>
+      <div>
+        <a class="hashtag" href="https://twitter.com/search/?q=%23PoliticalNovel&f=realtime">#PoliticalNovel</a>
+      </div>
+      <div>
+        <% if current_admin_user %>
+          <%= link_to "Log out", destroy_admin_user_session_path, class: "btn filled log-out", method: :delete %>
+        <% else %>
+          <%= link_to "Log in", login_path, class: "btn filled log-in" %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to "Privacy policy", privacy_path %>
+        <%= link_to "Terms and conditions", terms_path %>
+        <%= link_to "How to use CDP", cdp_how_path %>
+      </div>
+    </div>
+  </section>
+  <p class="cc">Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International license (CC BY 4.0)</a></p>
+</footer>
+
+</body>
+</html>

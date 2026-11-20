@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  full_name: MyText
+  birth: 2023-05-23
+  death: 2023-05-23
+  place_of_birth: MyText
+
+two:
+  id: 
+  full_name: MyText
+  birth: 2023-05-23
+  death: 2023-05-23
+  place_of_birth: MyText

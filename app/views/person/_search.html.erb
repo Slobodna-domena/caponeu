@@ -1,0 +1,28 @@
+<%= form_tag path, class: "map-search" do %>
+  <input type="hidden" name="order" value="<%= params[:order] %>"/>
+  <div>
+    <label>Name or surname</label>
+    <input type="text" name="title" value="<%= params[:title] %>" placeholder="All people"/>
+  </div>
+  <div>
+    <label>Person type</label>
+    <%= select_tag :type, options_from_collection_for_select(@types, "id", "label", params[:type]), prompt: "All types" %>
+  </div>
+  <div>
+    <label>Place of birth</label>
+    <input type="text" name="place_of_birth" value="<%= params[:place_of_birth] %>" placeholder="All places"/>
+  </div>
+  <div>
+    <label>Place of death</label>
+    <input type="text" name="place_of_death" value="<%= params[:place_of_death] %>" placeholder="All places"/>
+  </div>
+  <div>
+    <label>Date from</label>
+    <input type="date" name="time_begin" value="<%= params[:time_begin] %>" placeholder="from"/>
+  </div>
+  <div>
+    <label>Date to</label>
+    <input type="date" name="time_end" value="<%= params[:time_end] %>" placeholder="to"/>
+  </div>
+  <button class="btn filled search" type="submit">Search</button>
+<% end %>

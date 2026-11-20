@@ -1,0 +1,10 @@
+<% if record.categories.any? %>
+  <div>
+    <h4>Categories</h4>
+    <% links = Array.new %>
+    <% record.categories.each do |category| %>
+      <% links.push(link_to category.label, cdp_show_category_path(category.friendly_id)) %>
+    <% end %>
+    <%= raw links.join(" &bull; ") %>
+  </div>
+<% end %>

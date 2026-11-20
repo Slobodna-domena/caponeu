@@ -1,0 +1,113 @@
+@import "_variables"
+
+
+footer
+  width: 100%
+  background: $white
+  margin-top: 200px
+  p
+    font-size: 14px
+    line-height: 1.4
+  section
+    display: flex
+    max-width: 1420px
+    margin: 0px auto
+    padding-top: 60px
+    gap: 0px
+    img
+      display: block
+      margin-bottom: 40px
+    img:last-of-type
+      margin-top: 60px
+    p
+      margin-bottom: 20px
+    p:last-of-type
+      margin-bottom: 0px
+  .col-6:first-of-type
+    margin-bottom: 60px
+  .col-6:last-of-type
+    text-align: right
+    display: flex
+    flex-flow: column
+    div
+      margin-bottom: 40px
+    a.facebook, a.twitter, a.instagram
+      display: inline-block
+      height: 30px
+    a.facebook
+      width: 30px
+      background: url("facebook.svg") no-repeat
+      &:hover
+        background: url("facebook-hover.svg")
+    a.instagram
+      width: 30px
+      background: url("instagram.svg") no-repeat
+      margin-left: 40px
+      &:hover
+        background: url("instagram-hover.svg")
+    a.twitter
+      background: url("twitter.svg") no-repeat
+      margin-left: 40px
+      width: 38px
+      &:hover
+        background: url("twitter-hover.svg")
+    a.hashtag
+      color: $black
+      font-size: 18px
+      font-weight: 600
+      &:hover
+        color: $orange
+    .button.filled.yellow
+      margin-top: 20px
+    div:last-of-type
+      margin-top: 80px
+      margin-bottom: 60px
+      display: flex
+      flex-flow: column nowrap
+      gap: 30px 0px
+      justify-content: flex-end
+      align-items: flex-end
+      flex: 1
+      a
+        color: $black
+        font-weight: 600
+        font-size: 14px
+        &:hover
+          color: $orange
+  p.cc
+    border-top: 1px solid $light-grey
+    color: $grey
+    padding: 30px 50px
+    text-align: center
+    width: 100%
+    a
+      text-decoration: underline
+      color: inherit
+      &:hover
+        color: $orange
+        text-decoration: none
+
+@media only screen and (max-width: $breakpoint3)
+
+  footer
+    margin-top: 150px
+    section
+      flex-flow: column nowrap
+      gap: 80px 0px
+    .col-6:first-of-type
+      margin-bottom: 0px
+    .col-6:last-of-type
+      text-align: left
+      display: block
+      div:last-of-type
+        align-items: flex-start
+        a
+          text-align: left
+
+
+@media only screen and (max-width: $breakpoint5)
+
+  footer
+    margin-top: 80px
+    section
+      padding-top: 30px

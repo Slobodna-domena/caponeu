@@ -1,0 +1,16 @@
+<section class="section-header">
+  <h1 class="orange">Languages</h1>
+</section>
+<section class="topics no-margin-bottom">
+  <% @languages.each do |language| %>
+    <article class="col-4">
+      <a href="<%= cdp_show_language_path(language) %>">
+        <h3 class="<%= cdp_shape_disco(language.label) %>"><%= language.label %></h3>
+        <!-- <p><%= language.label %></p> -->
+      </a>
+    </article>
+  <% end %>
+</section>
+
+
+  <%= paginate @languages %>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  title: MyText
+  started: 2023-05-23
+  ended: 2023-05-23
+
+two:
+  id: 
+  title: MyText
+  started: 2023-05-23
+  ended: 2023-05-23

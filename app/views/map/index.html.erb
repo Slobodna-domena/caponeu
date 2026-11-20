@@ -1,0 +1,37 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <span>Map</span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">Explore novels on the map</h1>
+  <%= link_to "The Experiment with the Map", "/cdp/materials/the-political-novel-a-palimpsest#map-experiment", class: "btn text with-arrow" %>
+  <p class="info">
+    As you click through the items on the map, you'll dive deeper into related content.<br>
+    Your journey history will be saved each time you choose related content on the map.
+  </p>
+</section>
+<main class="map-tool">
+  <aside class="col-4">
+    <h3>Map search</h3>
+    <%= render 'novel/search', path: map_path %>
+  </aside>
+  <section class="col-8">
+    <%= link_to "See as a list", cdp_novels_path(
+      order: params[:order],
+      title: params[:title],
+      author: params[:author],
+      portrait_author: params[:portrait_author],
+      from_year: params[:from_year],
+      to_year: params[:to_year],
+      name: params[:name],
+      organization: params[:organization],
+      category: params[:category],
+      topic: params[:topic],
+      language: params[:language]
+    ), class: "orange-link", style: "float: right; margin-bottom: 1em" %>
+    <%= render "map", places: @places %>
+    <% render "card_on-map_orange" %>
+    <% render "card_on-map_orange_two-column" %>
+    <% render "card_in-stack" %>
+  </section>
+</main>

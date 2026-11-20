@@ -1,0 +1,25 @@
+<section class="timeline-block">
+  <div class="timeline-block_year">
+    <span><%= year %></span>
+  </div>
+  <div class="timeline-block_novels">
+    <% novels.each do |novel| %>
+      <article class="timeline-novel">
+        <%= link_to cdp_show_novel_path(novel) do %>
+          <div class="timeline-novel-img">
+            <%= image_tag novel.cover.book.url if novel.cover.url %>
+          </div>
+          <div class="timeline-novel-info">
+            <p class="author"><%= novel.authors.map(&:full_name).join(', ') %></p>
+            <h3 class="title"><%= novel.title %></h3>
+          </div>
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+  <div class="timeline-block_events">
+    <% events_for_year(year).each do |event| %>
+      <h3 class="timeline-event"><%= link_to event.timeline_title(year), cdp_show_event_path(event.friendly_id) %></h3>
+    <% end %>
+  </div>
+</section>

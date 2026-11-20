@@ -1,0 +1,49 @@
+<div id="map" style="width: 100%; height: 100%;"></div>
+<script>
+  function initMiniMap() {
+
+    <%= render "map/map_styles" %>
+
+    const locations = <%= places.to_json.html_safe %>
+
+    const center = { lat: parseFloat(locations[0].lat), lng: parseFloat(locations[0].lng) };
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 7,
+      center: center,
+      streetViewControl: false,
+      mapTypeControlOptions: {
+        mapTypeIds: []
+      }
+    });
+    map.mapTypes.set("caponeu", styledMapType);
+    map.setMapTypeId("caponeu");
+
+    const bounds = new google.maps.LatLngBounds();
+
+    const customIconOrange = {
+      url: "/map-pin-orange.png",
+      scaledSize: new google.maps.Size(38, 56),
+    };
+
+    locations.forEach(location => {
+      const pinIcon = customIconOrange
+      const marker = new google.maps.Marker({
+        position: { lat: parseFloat(location.lat), lng: parseFloat(location.lng) },
+        map: map,
+        icon: pinIcon,
+        title: location.location_name,
+      });
+      bounds.extend(marker.getPosition());
+
+      marker.addListener("click", () => {
+        window.location.href = `/cdp/map/novel/${location.slug}`
+      });
+    });
+
+    if (locations.length > 1) {
+      map.fitBounds(bounds);
+      map.padding = 20;
+    }
+  }
+</script>

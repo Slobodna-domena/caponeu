@@ -1,0 +1,10 @@
+<% if record.organizations.any? %>
+      <div>
+        <h4>Related organizations</h4>
+        <% links = Array.new %>
+        <% record.organizations.each do |organization| %>
+          <% links.push(link_to organization.label, cdp_show_organization_path(organization.friendly_id)) %>
+        <% end %>
+        <%= raw links.join(" &bull; ") %>
+      </div>
+<% end %>

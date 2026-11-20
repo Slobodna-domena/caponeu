@@ -1,0 +1,24 @@
+<section class="wide">
+    <div onclick="showOrHideSearchArea()"><h4>X</h4></div>
+  <main>
+    <%= form_for :search, id: "search_form" do |form| %>
+        <div>
+          <%= form.label :title, "TITLE" %>
+          <%= form.text_field :title, value: session[:params] ? session[:params]['title'] : nil %>
+        </div>
+        <div>
+          <%= form.label :category, "CATEGORY" %>
+          <%= form.select :category, @categories, selected: session[:params] ? session[:params]['category'] : nil %>
+        </div>
+        <div>
+          <%= form.label :time, "TIME PERIOD" %>
+          <%= form.date_field :time_begin, min: 0.days.ago %>
+          <%= form.date_field :time_end, min: 0.days.ago %>
+
+        </div>
+        <div>
+        <%= form.submit "SEARCH", class: "button filled yellow" %>
+        </div>
+    <% end %>
+  </main>
+</section>

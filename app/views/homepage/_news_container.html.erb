@@ -1,0 +1,8 @@
+<section class="latest" id="news">
+  <h2>STAY INFORMED</h2>
+  <div class="news_homepage_articles">
+    <% @news.each do |i| %>
+      <%=  render "news/news", news: i  %>
+    <%  end %>
+  </div>
+</section>

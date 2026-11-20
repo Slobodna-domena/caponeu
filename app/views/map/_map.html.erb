@@ -1,0 +1,159 @@
+<div id="<%= defined?(id) ? id : "map" %>" style="width: 100%; height: <%= defined?(directLink) ? 700 : 840 %>px;"></div>
+
+<% unless defined? second_map %>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV.fetch("GOOGLE_MAPS_API_KEY", "")}", async: true, defer: true %>
+<% end %>
+
+<script>
+  function createCustomMarker(number) {
+    // Create a canvas element
+    const canvas = document.createElement("canvas");
+    canvas.width = 60;
+    canvas.height = 60;
+    const context = canvas.getContext("2d");
+
+    // Draw a circular shape for the marker
+    context.beginPath();
+    context.arc(30, 30, 30, 0, 2 * Math.PI);
+    context.fillStyle = "#a62512"; // Marker color
+    context.fill();
+    context.closePath();
+
+    // Add dynamic text (the number) to the marker
+    context.fillStyle = "white"; // Text color
+    context.font = "bold 28px Arial";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(number, 30, 30); // Draw number in the center
+
+    // Create a marker using the canvas as an icon
+    return {
+      url: canvas.toDataURL(), // Use the canvas as an image
+      scaledSize: new google.maps.Size(40, 40), // Scale marker to desired size
+    };
+  }
+
+  function init_<%= defined?(id) ? id : "map" %>() {
+
+    const directLink = <%= defined?(directLink) ? true : false %>
+
+    <%= render "map/map_styles" %>
+
+    const center = { lat: 49.8735495987146, lng: 8.649656283046134 }; //Darmstadt, Germany
+
+    const map = new google.maps.Map(document.getElementById("<%= defined?(id) ? id : "map" %>"), {
+      zoom: 5,
+      center: center,
+      streetViewControl: false,
+      mapTypeControlOptions: {
+        mapTypeIds: []
+      },
+      minZoom: 3  // Add minimum zoom constraint
+    });
+    map.mapTypes.set("caponeu", styledMapType);
+    map.setMapTypeId("caponeu");
+
+    // Add zoom changed listener to enforce minimum zoom
+    map.addListener('zoom_changed', () => {
+      if (map.getZoom() < 3) {
+        map.setZoom(3);
+      }
+    });
+
+    const bounds = new google.maps.LatLngBounds();
+    let currentInfoWindow = null; // Track currently open infoWindow
+
+    const locations = <%= places.to_json.html_safe %>
+
+    const customIconOrange = {
+      url: "/map-pin-orange.png",
+      scaledSize: new google.maps.Size(38, 56),
+    };
+
+    const customIconBlue = {
+      url: "/map-pin-blue.png",
+      scaledSize: new google.maps.Size(38, 56),
+    };
+
+    const customIconGray = {
+      url: "/map-pin-gray.png",
+      scaledSize: new google.maps.Size(38, 56),
+    };
+
+    //console.log(locations)
+    locations.forEach(location => {
+      const iconMap = {
+        novel: customIconOrange,
+        event: customIconBlue,
+        location: customIconOrange
+      };
+
+      const pinIcon = location.items[0].place_of_origin ? customIconOrange : iconMap[location.items[0].type] || customIconOrange;
+      const marker = new google.maps.Marker({
+        position: { lat: parseFloat(location.lat), lng: parseFloat(location.lng) },
+        map: map,
+        icon: location.items.length == 1 ? pinIcon : createCustomMarker(location.items.length),
+        title: location.location_name,
+      });
+      bounds.extend(marker.getPosition());
+      if (locations.length > 1) {
+        map.fitBounds(bounds);
+      }
+
+      let items = "";
+      location.items.forEach(item => {
+        if (item.authors) {
+            authors = `<span class="sub-header">${item.authors}</span>`
+        } else {
+            authors = ""
+        }
+
+        link = directLink ? `<a href="/cdp/${item.type}s/${item.slug}" class="btn filled arrow-right">See more</a></div>` : `<a href="/cdp/map/${item.type}/${item.slug}#map" class="btn filled arrow-right">See related</a></div>`;
+
+        items += `<div>${authors}
+                  <h4 class="title">${item.title}</h4>
+                  ${link}`
+      });
+      const twoColumn = location.items.length > 3 ? " two-column" : ""
+      const infowindow = new google.maps.InfoWindow({
+        content: `<article class="map-card on-map orange${twoColumn}">
+                  <span class="header">${location.location_name}</span>
+                  <div class="container">
+                  ${items}
+                  </div>
+                </article>`,
+      });
+
+      // Reset currentInfoWindow when close button is clicked
+      infowindow.addListener('closeclick', () => {
+        currentInfoWindow = null;
+      });
+
+      marker.addListener("click", () => {
+        if (currentInfoWindow === infowindow) {
+          // If this infoWindow is already open, close it
+          currentInfoWindow.close();
+          currentInfoWindow = null;
+        } else {
+          // Close the previously open infoWindow if exists
+          if (currentInfoWindow) {
+            currentInfoWindow.close();
+          }
+          // Open this infoWindow and track it
+          infowindow.open(map, marker);
+          currentInfoWindow = infowindow;
+        }
+      });
+    });
+  }
+
+  // Wait for the script to load before initializing maps
+  document.addEventListener("DOMContentLoaded", function () {
+    let checkInterval = setInterval(() => {
+        if (typeof google !== "undefined" && google.maps) {
+            clearInterval(checkInterval);
+            init_<%= defined?(id) ? id : "map" %>();
+        }
+    }, 100);
+  });
+</script>

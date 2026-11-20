@@ -1,0 +1,137 @@
+@import "_variables"
+
+header
+  max-width: 1420px
+  margin: 0px auto
+  padding: 30px 50px
+  display: flex
+  justify-content: space-between
+  margin-bottom: 60px
+  .right
+    position: relative
+    flex: 0 1 300px
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    gap: 30px 20px
+  .user
+    display: flex
+    flex-flow: row wrap
+    margin-right: 30px
+    justify-content: flex-end
+    span
+      flex: 100%
+      text-align: right
+      margin-bottom: 5px
+    a
+      font-size: 14px
+      text-transform: uppercase
+      color: $secondary-blue
+      font-weight: bold
+      text-decoration: underline
+      text-align: right
+      &:hover
+        color: $orange
+        text-decoration: none
+
+  .logo
+    flex: 0 0 300px
+    margin-right: 20px
+    img
+      width: 100%
+    &::before, &::after
+      content: ""
+      display: block
+      position: absolute
+      z-index: -1
+    &::before
+      background: url("decor-header-01.svg") no-repeat
+      top: 57px
+      height: 24px
+      width: 104px
+      left: 50px
+    &::after
+      background: url("decor-header-02.svg") right no-repeat
+      height: 51px
+      width: 403px
+      left: 34%
+      top: 57px
+
+  .search-icon
+    position: relative
+    z-index: 1
+    width: 50px
+    height: 50px
+    border: none
+    background: url("search-icon-black.svg") no-repeat center
+    background-size: 38px
+    &:hover
+      cursor: pointer
+      background: url("search-icon-hover.svg") no-repeat center
+      background-size: 38px
+
+
+
+
+@media only screen and (max-width: 1800px)
+
+  header
+    .logo
+      &::before
+        top: 150px
+        left: 50px
+
+@media only screen and (max-width: 1150px)
+
+  header
+    .logo
+      &::after
+        width: 132px
+        left: 45%
+
+@media only screen and (max-width: $breakpoint3)
+
+  header
+    .logo
+      &::after
+        top: 150px
+        width: 131px
+        left: auto
+        right: 50px
+
+@media only screen and (max-width: $breakpoint4)
+  header
+    .right
+      flex-flow: row wrap
+    .user
+      width: 100%
+      order: 1
+      margin-right: 0px
+    .logo::after
+      display: none
+
+@media only screen and (max-width: $breakpoint5)
+
+  header
+    padding: 30px 25px
+    margin-bottom: 30px
+    > div
+      align-items: flex-start
+    .logo
+      flex: 0 0 200px
+      &::before
+        display: none
+
+@media only screen and (max-width: $breakpoint6)
+
+  header
+    .logo
+      flex: 0 0 170px
+
+    > div
+      .button.filled.yellow
+        padding: 12px 26px
+        font-size: 14px
+        margin-right: 20px
+      > div
+        margin-right: 20px

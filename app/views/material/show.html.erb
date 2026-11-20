@@ -1,0 +1,38 @@
+<section class="breadcrumbs">
+  <%= link_to "Caponeu digital platform", cdp_home_path %>
+  <%= link_to "Materials", cdp_materials_path %>
+</section>
+<section class="page cdp">
+  <main class="col-8">
+    <div class="header">
+      <h1><%= @material.title %></h1>
+      <p class="presented_by">
+        <%= "By: " if @material.authors.any? %>
+        <%= raw @material.authors.map{ |a| link_to a.full_name, cdp_show_person_path(a.friendly_id) }.join(", ") %>
+
+      </p>
+      <% if @material.produced_by_caponeu %>
+        <p class="caponeu-product">This material is a product of the Caponeu project. <%= "Published until " + @material.published_until.strftime("%d.%m.%Y.") if @material.published_until %></p>
+      <% else %>
+        <% if @material.published_until %>
+          <p class="caponeu-product">Published until <%= @material.published_until.strftime("%d.%m.%Y.") %></p>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="summary">
+      <p><%= raw @material.summary %></p>
+    </div>
+    <p><%= raw @material.content %></p>
+    <% @material.attachments.each do |attachment| %>
+      <%= link_to attachment.identifier, attachment.url, class: "download" %>
+    <% end %>
+  </main>
+  <aside class="white col-4">
+    <%= render 'event/related_side', record: @material %>
+    <%= render 'person/related_side', record: @material %>
+    <%= render 'organization/related_side', record: @material %>
+  </aside>
+</section>
+<%= render 'novel/related', record: @material %>
+<%= render 'collections/related', record: @material %>
+<%= render 'topic/related', record: @material %>

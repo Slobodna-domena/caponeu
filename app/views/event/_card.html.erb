@@ -1,0 +1,6 @@
+<article class="col-4">
+  <a href="<%= cdp_show_event_path(event.slug) %>">
+    <p><%= event.event_types.map{|t| t.label}.join(" • ") %></p>
+    <h3><%= event.title %></h3>
+  </a>
+</article>

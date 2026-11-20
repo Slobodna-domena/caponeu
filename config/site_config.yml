@@ -1,0 +1,11 @@
+default: &default
+  site_name: "CAPONEU"
+  site_keywords: "Cartography of the Political Novel in Europe exploring how political novels across Europe reflect and shape public engagement with 21st-century political issues and society."
+
+development:
+  <<: *default
+  root_url: "http://localhost:3000"
+
+production:
+  <<: *default
+  root_url: "https://caponeu.eu"

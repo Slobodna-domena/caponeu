@@ -1,0 +1,16 @@
+<main class="hero">
+  <div class="col-6">
+    <p>CAPONEU - Cartography of the Political Novel in Europe
+      aims to assess the political novel as an important element of European political,
+      social and cultural heritage. It sets out to examine how people in different national
+      and cultural contexts engage with contemporary political issues and thereby
+      have their share in shaping European societies and politics.
+    </p>
+    <a class="btn text with-arrow" href="<%= about_path() %>">more about the project</a>
+  </div>
+  <div class="col-6 cdp-enter">
+    <%= link_to image_tag("cdp_enter.gif"), cdp_home_path %>
+  </div>
+</main>
+
+<%= render "news_container", news: @news %>

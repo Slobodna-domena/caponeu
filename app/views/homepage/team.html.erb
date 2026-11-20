@@ -1,0 +1,59 @@
+<section class="breadcrumbs">
+  <a href="<%= root_path %>">Home</a>
+  <a href="<%= about_path() %>">What is CAPONEU?</a>
+  <span>Meet CAPONEU team</span>
+</section>
+<section class="page page-team">
+  <main class="col-12">
+    <h1>Meet the researchers, authors, and creatives behind CAPONEU</h1>
+    <div class="page-logos page-logos-team">
+      <% @members.each do |org| %>
+        <%= link_to cdp_show_organization_path(org), class:"logo" do %>
+          <% if org.logo.url %>
+            <%= image_tag org.logo.url %>
+          <% end %>
+          <hr>
+          <p>
+            <strong><%= org.title %><%= " (coordinator)" if org.title == "University of Zagreb" %></strong>
+          </p>
+          <p><%= org.subtitle %></p>
+        <% end %>
+        <div class="cards-default people">
+          <% org.people.joins(:person_types).where(person_types: { label: "Caponeu Team Member" }).each do |person| %>
+            <%= render "person/card", person: person %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <h2>Third party members with payment</h2>
+    <div class="page-logos page-logos-team">
+      <% @third_party.each do |org| %>
+        <%= link_to cdp_show_organization_path(org), class:"logo" do %>
+          <% if org.logo.url %>
+            <%= image_tag org.logo.url %>
+          <% end %>
+          <hr>
+          <p>
+            <strong><%= org.title %><%= " (coordinator)" if org.title == "University of Zagreb" %></strong>
+          </p>
+          <p><%= org.subtitle %></p>
+        <% end %>
+        <div class="cards-default people">
+          <% org.people.each do |person| %>
+            <%= render "person/card", person: person %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <h2>External contributors</h2>
+    <div class="cards-default people">
+      <% @externals.each do |person| %>
+        <%= render "person/card", person: person %>
+      <% end %>
+    </div>
+  </main>
+
+  <!-- <aside class="col-4">
+  </aside> -->
+</section>

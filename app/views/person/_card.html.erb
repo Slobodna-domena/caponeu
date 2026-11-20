@@ -1,0 +1,11 @@
+<article class="col-4">
+  <a href="<%= cdp_show_person_path(person.friendly_id) %>">
+    <% if person.photo.url %>
+      <%= image_tag person.photo.compact.url %>
+    <% end %>
+    <div class="group">
+      <p> <%= person.person_types.map {|t| t.label }.join(" • ") %> </p>
+      <h3><%= person.full_name %></h3>
+    </div>
+  </a>
+</article>

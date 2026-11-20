@@ -1,0 +1,46 @@
+<section class="breadcrumbs">
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <span>Materials</span>
+</section>
+<section class="section-header margin-top-sm">
+  <h1 class="orange">Materials</h1>
+</section>
+<main class="display-all no-margin-bottom">
+  <div class="sort-header col-8">
+    <div class="sort-container">
+      <% if @materials.any? %>
+        <span>Sort by:</span>
+        <div class="sort">
+          <div><%= @filter_title %></div>
+          <ul>
+            <li><%= link_to "Name (Ascending)", cdp_materials_url(order: "name_asc") %></li>
+            <li><%= link_to "Name (Descending)", cdp_materials_url(order: "name_desc") %>
+              <li><%= link_to "Date", order: "date" %></li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <button class="btn text advanced-search">Advanced search</button>
+    <aside class="advanced-search-container col-4">
+      <h3>Advanced search</h3>
+      <button class="close-icon" type="button"></button>
+      <%= render 'material/search', path: cdp_materials_path %>
+    </aside>
+    <section class="cards-default materials col-8">
+      <% @materials.each do |material| %>
+        <%= render "card", material: material %>
+      <% end %>
+    </section>
+    <% unless params[:all] %>
+      <section class="pagination-container with-show-all">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <%= paginate @materials, params: @pagination_params %>
+        </div>
+        <div class="col-2">
+          <%= link_to "Show&nbsp;all".html_safe, url_for(all: "1"), class: "btn filled", rel: "nofollow" if @materials.total_pages > 1 %>
+        </div>
+      </section>
+    <% end %>
+  </main>

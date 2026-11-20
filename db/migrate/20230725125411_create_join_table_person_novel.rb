@@ -1,0 +1,8 @@
+class CreateJoinTablePersonNovel < ActiveRecord::Migration[7.0]
+  def change
+    create_table :novel_portrait_authors do |t|
+      t.belongs_to :novel
+      t.belongs_to :person
+    end
+  end
+end

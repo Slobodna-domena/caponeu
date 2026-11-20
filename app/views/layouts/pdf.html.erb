@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      header,
+      .as_pdf,
+      .breadcrumbs,
+      .hidden_on_pdf,
+      aside,
+      .section-header,
+      .topics, img {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+        font-family: "uncut", Arial, sans-serif;
+        color: black;
+      }
+
+      p,
+      ul li,
+      ol li {
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 1.55;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        line-height: 1.2;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: 600;
+      }
+
+      h1,
+      h2 {
+        font-size: 42px;
+      }
+
+      h3 {
+        font-size: 22px;
+      }
+
+      h4 {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
+
+      strong {
+        font-weight: 600;
+        color: black;
+      }
+
+      em {
+        font-style: italic;
+        color: black;
+      }
+
+      span {
+        color: black;
+      }
+
+      section {
+        margin: 0 auto;
+        padding: 0 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

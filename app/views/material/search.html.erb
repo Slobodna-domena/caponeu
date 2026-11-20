@@ -1,0 +1,53 @@
+<section class="section-header">
+  <h1 class="orange">Materials - Search</h1>
+  <%= link_to "<< Back to all Materials", cdp_materials_path %>
+</section>
+
+<% unless @hide_search %>
+  <section class="wide">
+    <main>
+      <%= form_with url: cdp_search_materials_path, method: :post do |form| %>
+        <div>
+          <%= form.label :title, "TITLE" %>
+          <%= form.text_field :title, value: session[:material_params] ? session[:material_params]['title'] : nil %>
+        </div>
+        <div>
+          <%= form.label :type, "TYPE" %>
+          <%= form.select :type, @types, selected: session[:material_params] ? session[:material_params]['type'] : nil %>
+        </div>
+        <div>
+          <%= form.label :topic, "TOPICS" %>
+          <%= form.select :topic, @keywords, selected: session[:material_params] ? session[:material_params]['topic'] : nil %>
+        </div>
+        <div>
+          <%= form.submit "SEARCH", class: "button filled yellow" %>
+        </div>
+      <% end %>
+    </main>
+  </section>
+<% end %>
+
+<% if @hide_search %>
+  <section class="section-header results">
+    <h2>Showing results for:</h2>
+    <ul>
+      <% params.each do |p| %>
+        <% if p[1].present? and !excluded_params.include?(p[0]) %>
+          <li><strong><%= p[0] %></strong>: <%= value_for(p[0], p[1]) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <div>
+      <%= link_to "Refine search", cdp_search_materials_path, class: "search" %>
+    </div>
+  </div>
+</section>
+
+<section class="cards-default materials">
+  <% @materials.each do |material| %>
+    <%= render "card", material: material %>
+  <% end %>
+</section>
+<% end %>
+
+<%== paginate @materials if @materials %>

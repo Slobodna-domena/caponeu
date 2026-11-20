@@ -1,0 +1,17 @@
+<% current_index = params[:index] ? params[:index] : session[:map_items].size - 1 %>
+<% item = Object.const_get(model_name.titleize).find(item_id)  %>
+<article class="map-card in-stack<%= current_index.to_i == index ? " is-active" : nil %>">
+  <%= link_to explore_path(model_name, item, index: index), class: "card-link" do %>
+    <% if item.respond_to?(:authors) %>
+      <span class="sub-header"><%= item.authors.map { |a| a.full_name }.join(", ") %></span>
+    <% end %>
+    <h4 class="title"><%= item.title %></h4>
+  <% end %>
+  <% if model_name == "novel" %>
+    <%= link_to "Read more...", cdp_show_novel_path(item), class: "btn outline" %>
+  <% elsif model_name == "event" %>
+    <%= link_to "Read more...", cdp_show_event_path(item), class: "btn outline" %>
+  <% elsif model_name == "material" %>
+    <%= link_to "Read more...", cdp_show_material_path(item), class: "btn outline" %>
+  <% end %>
+</article>

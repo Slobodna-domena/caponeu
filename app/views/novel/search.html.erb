@@ -1,0 +1,66 @@
+
+<section class="section-header">
+  <h1 class="orange">Search political novels</h1>
+  <%= link_to "<< Back to all political novels", cdp_novels_path %>
+</section>
+
+<% unless @hide_search %>
+<section class="wide">
+  <main>
+    <%= form_with url: cdp_search_novels_url, method: :post do |form| %>
+        <div>
+          <%= form.label :title, "TITLE" %>
+          <%= form.text_field :title, value: session[:params] ? session[:params]['title'] : nil %>
+        </div>
+        <div>
+          <%= form.label :author, "AUTHOR" %>
+          <%= form.text_field :author, value: session[:params] ? session[:params]['author'] : nil %>
+        </div>
+        <div>
+          <%= form.label :city, "CITY" %>
+          <%= form.text_field :city, value: session[:params] ? session[:params]['city'] : nil %>
+        </div>
+        <div>
+          <%= form.label :year, "YEAR" %>
+          <%= form.text_field :year, value: session[:params] ? session[:params]['year'] : nil %>
+        </div>
+        <div>
+          <%= form.label :language, "LANGUAGE" %>
+          <%= form.select :language, @languages, selected: session[:params] ? session[:params]['language'] : nil %>
+        </div>
+        <div>
+          <%= form.label :category, "CATEGORY" %>
+          <%= form.select :category, @categories, selected: session[:params] ? session[:params]['category'] : nil %>
+        </div>
+        <div>
+          <%= form.label :topic, "TOPICS" %>
+          <%= form.select :topic, @keywords, selected: session[:params] ? session[:params]['topic'] : nil %>
+        </div>
+        <div>
+        <%= form.submit "SEARCH", class: "button filled yellow" %>
+        </div>
+    <% end %>
+  </main>
+</section>
+<% end %>
+
+<% if @hide_search %>
+  <section class="section-header results">
+    <h2>Showing results for:</h2>
+    <ul>
+      <% params.each do |p| %>
+        <% if p[1].present? and !excluded_params.include?(p[0]) %>
+          <li><strong><%= p[0] %></strong>: <%= value_for(p[0], p[1]) %></li>
+        <% end %>
+      <% end %>
+    </ul>
+      <div>
+        <%= link_to "Refine search", cdp_search_novels_path, class: "search" %>
+      </div>
+  </section>
+  <section class="novels">
+    <% @search.each do |novel| %>
+      <%= render "card", novel: novel %>
+    <% end %>
+  </section>
+<% end %>

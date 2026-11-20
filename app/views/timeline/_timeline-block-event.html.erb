@@ -1,0 +1,10 @@
+<section class="timeline-block">
+  <div class="timeline-block_year">
+    <span><%= year %></span>
+  </div>
+  <div class="timeline-block_events">
+    <% events.each do |event| %>
+      <h3 class="timeline-event"><%= link_to event.title, cdp_show_event_path(event.friendly_id) %></h3>
+    <% end %>
+  </div>
+</section>

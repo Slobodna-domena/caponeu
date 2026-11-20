@@ -1,0 +1,109 @@
+<section class="breadcrumbs">
+<% if @event.event_types.any? { |type| type.hide_from_directory } %>
+  <a href="<%= root_path %>">Home</a>
+  <a href="<%= about_path() %>">What is CAPONEU?</a>
+  <a href="<%= about_events_path() %>">See CAPONEU events</a>
+  <span><%= @event.title %></span>
+<% else %>
+  <a href="<%= cdp_home_path() %>">Caponeu digital platform</a>
+  <a href="<%= cdp_event_path() %>">Events</a>
+  <span><%= @event.title %></span>
+<% end %>
+</section>
+<section class="page cdp">
+  <main class="col-8">
+    <h1><%= @event.title %></h1>
+    <%= @event.event_types.map {|e| e.label}.join(", ") %>
+    <p>
+
+      <% if  @event.started.present? %>
+        <%= @event.started.strftime("%d.%m.%Y") %>
+      <% end %>
+
+      <% if @event.ended.present? %>
+        - <%= @event.ended.strftime("%d.%m.%Y") %></p>
+    <% end %>
+
+    <div class="summary">
+      <%= raw @event.short_summary %>
+    </div>
+    <%= raw @event.content if @event.content %>
+
+    <% if @event.galleries.any? %>
+      <div class="gallery swiper">
+        <div class="swiper-wrapper">
+          <% @event.galleries.each do |g| %>
+            <% if g.image.url %>
+              <div class="swiper-slide">
+                <%= image_tag g.image.big.url%>
+                <% if g.caption.present? %>
+                  <p class="photo-caption"><%= g.caption %></p>
+                <% end %>
+              </div>
+            <% end %>
+            <% if g.video.present? %>
+              <div class="swiper-slide">
+                <iframe src="https://www.youtube.com/embed/<%= g.video %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <% if g.caption.present? %>
+                  <p class="photo-caption"><%= g.caption %></p>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% if @event.galleries.count > 1 %>
+          <div class="pagination">
+            <span class="swiper-button-prev"></span>
+            <div id="numberSlides">1/<%= @event.galleries.count %></div>
+            <span class="swiper-button-next"></span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% @event.attachments.order(:sort).each do |a| %>
+      <% if a.file.present? %>
+        <p><%= link_to a.filename, a.file.url, class: "download" %></p>
+      <% end %>
+    <% end %>
+
+  </main>
+  <aside class="white col-4">
+    <% if @event.people.any? %>
+      <div>
+        <h4>Related people</h4>
+        <% links = Array.new %>
+        <% @event.people.each do |person| %>
+          <% links.push(link_to person.full_name, cdp_show_person_path(person.friendly_id)) %>
+        <% end %>
+        <%= raw links.join(" &bull; ") %>
+      </div>
+    <% end %>
+    <%= render 'organization/related_side', record: @event %>
+  </aside>
+</section>
+
+<% unless  @child_events.length==0 %>
+  <section class="section-header margin-top-sm">
+    <h1 class="orange">Connected events</h1>
+  </section>
+  <main class="cards-default topics">
+    <% for event in @child_events %>
+      <%= render "card" , event: event %>
+    <% end %>
+  </main>
+<% end %>
+
+<% unless @event.main_event.nil? %>
+  <section class="section-header margin-top-sm">
+    <h1 class="orange">See more</h1>
+  </section>
+  <main class="cards-default topics">
+    <%= render "card" , event: @event.main_event %>
+  </main>
+<% end %>
+
+<%= render 'novel/related', record: @event %>
+<%= render 'material/related', record: @event %>
+<%= render 'topic/related', record: @event %>
+<%= render 'collections/related', record: @event %>

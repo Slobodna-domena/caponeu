@@ -1,0 +1,16 @@
+<section class="cards-default people col-8">
+  <% people.each do |person| %>
+    <%= render "card", person: person %>
+  <% end %>
+</section>
+<% unless hide_all %>
+  <section class="pagination-container with-show-all">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <%= paginate people %>
+    </div>
+    <div class="col-2">
+      <%= link_to "Show&nbsp;all".html_safe, url_for(all: "1"), class: "btn filled", rel: "nofollow" if people.total_pages > 1 %>
+    </div>
+  </section>
+<% end %>

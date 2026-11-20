@@ -1,0 +1,41 @@
+<section class="breadcrumbs">
+  <a href="<%= root_path %>">Home</a>
+  <span>What is CAPONEU?</span>
+</section>
+<section class="page page-about">
+  <main class="col-12">
+    <h1>What is CAPONEU?</h1>
+    <div class="btn-container">
+      <%= link_to "THE IMPOSSIBLE GENRE", "/cdp/materials/the-political-novel-a-palimpsest#introductory-reflections", class: "btn text with-arrow" %>
+      <%= link_to "See CAPONEU Events", about_events_path, class: "btn text with-arrow" %>
+      <%= link_to "Meet CAPONEU Team", about_team_path, class: "btn text with-arrow" %>
+    </div>
+    <div class="body-paragraph">
+      <p>
+        Cartography of the Political Novel in Europe (CAPONEU) sets out to examine how people in different national and cultural contexts engage with contemporary political issues and thereby have their share in shaping European societies and politics in the 21st century. This is done through the prism of an extraordinary aesthetic and social phenomenon that we call the political novel in Europe, which is currently gaining prominence not only in strictly delimited literary circles but in European societies at large. Given this new relevance of political writing, CAPONEU’s goal is to assess the political novel as an important element of European political, social and cultural heritage and as a tool for community building, political education and European advocacy.
+      </p>
+      <p>
+        CAPONEU brings together an interdisciplinary research team that seeks not only to unpack the rich literary heritage of the 20th century but also to make the political novel experiences relevant to our present. It allows us to understand how perceptions formed by different beliefs, values, traditions, economy, history, culture, age and gender are reflected in the political novel as a specific literary genre, and how and why this genre re-emerges as a social factor today. Thus, not only the representation of beliefs and traditions in the political novel will be analysed, but also the role of the political novel itself in shaping and changing perspectives on the individual, the state, the economy, and especially on Europe’s historical and cultural past. Aware that the European project has been destabilised in recent decades by crises, the question now is how the European heritage of the political novel can become active in strengthening the resilience of European societies to crises. Given the simultaneous resurgence of various forms of populism and/or authoritarianism, a subsequent recession, and, most recently, war with unpredictable consequences, answering this question will be crucial for the future of Europe.
+      </p>
+    </div>
+    <h2>CAPONEU consortium members</h2>
+    <%= render "map/map", places: @places, directLink: 1 %>
+    <div class="page-logos">
+      <% @members.each do |org| %>
+        <%= link_to cdp_show_organization_path(org), class:"logo" do %>
+          <% if org.logo.url %>
+            <%= image_tag org.logo.url %>
+          <% end %>
+          <hr>
+          <p>
+            <strong>
+              <%= org.title %><%= " (coordinator)" if org.title == "University of Zagreb" %>
+            </strong>
+          </p>
+          <p><%= org.subtitle %></p>
+        <% end %>
+      <% end %>
+    </div>
+
+  </main>
+</section>
